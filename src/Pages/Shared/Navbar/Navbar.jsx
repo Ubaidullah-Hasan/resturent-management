@@ -6,12 +6,12 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
 
     const menu = [
-        <li><Link to={'/'}>Home</Link></li>,
-        <li><Link to={'contactus'}>CONTACT us</Link></li>,
-        <li><Link to={''}>DASHBOARD</Link></li>,
-        <li><Link to={''}>Our Menu</Link></li>,
-        <li><Link to={''}>Our Shop</Link></li>,
-        <div className="dropdown dropdown-end">
+        <li key="home"><Link to={'/'}>Home</Link></li>,
+        <li key="contact"><Link to={'contactus'}>CONTACT us</Link></li>,
+        <li key="dashboard"><Link to={''}>DASHBOARD</Link></li>,
+        <li key="menu"><Link to={''}>Our Menu</Link></li>,
+        <li key="shop"><Link to={''}>Our Shop</Link></li>,
+        <div className="dropdown dropdown-end" key={"cart"}>
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
                 <div className="indicator">
                     <img src={cart} alt="cart" />
@@ -31,9 +31,9 @@ const Navbar = () => {
             </div>
         </div>,
 
-        <li><Link to={''}>Logout</Link></li>,
+        <li key="/logout"><Link to={''}>Logout</Link></li>,
         
-        <div className="dropdown dropdown-end">
+        <div className="dropdown dropdown-end" key={"profile"}>
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
                     {/* todo: change img */}
