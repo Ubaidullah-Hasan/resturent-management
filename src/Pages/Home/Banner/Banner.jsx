@@ -54,7 +54,7 @@ const Banner = () => {
     return (
         // todo
         <div>
-            <Carousel carouselItems={carouselItems} />
+            <Carousel carouselItems={carouselItems} autoSlide={true}/>
         </div>
     );
 };

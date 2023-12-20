@@ -1,27 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
 
 
 
-const Carousel = ({ carouselItems }) => {
+const Carousel = ({ carouselItems, autoSlide = false, autoSlideInterval = 3000 }) => {
     const navigate = useNavigate();
     const [current, setCurrent] = useState(0);
 
     const prev = () => {
-        setCurrent(current === 0 ? carouselItems.length - 1 : current - 1);
+        setCurrent((current) => current === 0 ? carouselItems.length - 1 : current - 1);
     }
 
     const next = () => {
-        setCurrent(current === carouselItems.length - 1 ? 0 : current + 1);
+        setCurrent((current) => current === carouselItems.length - 1 ? 0 : current + 1);
+        console.log("interval")
     }
-    console.log("prev = ", current, "next = ", current);
 
 
     const handleLink = (link) => {
         navigate(link);
         console.log("link")
     }
+
+    useEffect(() => {
+        if(!autoSlide) return;
+        const intervalId = setInterval(next, autoSlideInterval);
+        return () => clearInterval(intervalId);
+    }, []);
 
     return (
         <>
