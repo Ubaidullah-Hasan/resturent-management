@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const Carousel = ({ carouselItems, autoSlide = false, autoSlideInterval = 3000 }) => {
     const navigate = useNavigate();
     const [current, setCurrent] = useState(0);
+    const [isAutoSlideHover, setIsAutoSlideHover] = useState(autoSlide);
 
     const prev = () => {
         setCurrent((current) => current === 0 ? carouselItems.length - 1 : current - 1);
@@ -14,7 +15,19 @@ const Carousel = ({ carouselItems, autoSlide = false, autoSlideInterval = 3000 }
 
     const next = () => {
         setCurrent((current) => current === carouselItems.length - 1 ? 0 : current + 1);
-        console.log("interval")
+    }
+    
+    // hover autoslide off
+    const handleMouseOverOffAutoSlide = () => {
+        if(!isAutoSlideHover) return;
+        setIsAutoSlideHover(false);
+        console.log("mouse over")
+    }
+    // hover autoslide default depending on autoSlide
+    const handleMouseOutOnAutoSlide = () => {
+        if(!autoSlide) return;
+        setIsAutoSlideHover(autoSlide);
+        console.log("mouseOut")
     }
 
 
@@ -23,15 +36,19 @@ const Carousel = ({ carouselItems, autoSlide = false, autoSlideInterval = 3000 }
         console.log("link")
     }
 
+    const handleSlideImg = (i) => {
+        setCurrent(i);
+    }
+
     useEffect(() => {
-        if(!autoSlide) return;
+        if (!isAutoSlideHover) return;
         const intervalId = setInterval(next, autoSlideInterval);
         return () => clearInterval(intervalId);
-    }, []);
+    }, [current, isAutoSlideHover, autoSlideInterval]);
 
     return (
         <>
-            <div className='overflow-hidden cursor-pointer relative'>
+            <div className='overflow-hidden cursor-pointer relative' onMouseOver={handleMouseOverOffAutoSlide} onMouseOut={handleMouseOutOnAutoSlide}>
                 <div className='flex transition-transform ease-out duration-500' style={{ transform: `translateX(-${current * 100}%)` }}>
                     {
                         carouselItems.map((item, index) => (
@@ -56,7 +73,7 @@ const Carousel = ({ carouselItems, autoSlide = false, autoSlideInterval = 3000 }
                 {/* indicator */}
                 <div className='hidden absolute bottom-5 right-0 left-0 md:flex items-center justify-center gap-3'>
                     {carouselItems.map((item, i) => (
-                        <div key={i} className={`cursor-default w-4 h-4 rounded-full  ${current === i ? "p-3 bg-blue-500" : "bg-white/90"}`} />
+                        <div onClick={() => handleSlideImg(i)} key={i} className={`cursor-default w-4 h-4 rounded-full  ${current === i ? "p-3 bg-blue-500" : "bg-white/90"}`} />
                     ))}
                 </div>
             </div>
@@ -66,7 +83,7 @@ const Carousel = ({ carouselItems, autoSlide = false, autoSlideInterval = 3000 }
                 <div className='flex'>
                     {
                         carouselItems.map((img, i) => (
-                            <div key={i} className={`border-2 ${current === i ? 'border-orange-500 opacity-100' : 'border-white opacity-70'}`}>
+                            <div onClick={()=>handleSlideImg(i)} key={i} className={`border-2 ${current === i ? 'border-orange-500 opacity-100' : 'border-white opacity-70'}`}>
                                 <img src={img?.img} alt='' className='aspect-video object-cover	' />
                             </div>
                         ))
