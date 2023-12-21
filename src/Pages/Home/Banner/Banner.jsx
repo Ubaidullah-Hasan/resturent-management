@@ -54,7 +54,11 @@ const Banner = () => {
     return (
         // todo
         <div>
-            <Carousel carouselItems={carouselItems} autoSlide={true}/>
+            <Carousel
+                carouselItems={carouselItems}
+                autoSlide={true}
+                autoSlideInterval={2000}
+            />
         </div>
     );
 };

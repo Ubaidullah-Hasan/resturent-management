@@ -21,13 +21,11 @@ const Carousel = ({ carouselItems, autoSlide = false, autoSlideInterval = 3000 }
     const handleMouseOverOffAutoSlide = () => {
         if(!isAutoSlideHover) return;
         setIsAutoSlideHover(false);
-        console.log("mouse over")
     }
     // hover autoslide default depending on autoSlide
     const handleMouseOutOnAutoSlide = () => {
         if(!autoSlide) return;
         setIsAutoSlideHover(autoSlide);
-        console.log("mouseOut")
     }
 
 
