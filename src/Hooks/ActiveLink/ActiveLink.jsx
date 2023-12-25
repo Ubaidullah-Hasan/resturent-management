@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import "./ActiveLink.css"
 
 const ActiveLink = ({children, to}) => {
-    console.log(to)
 
     return (
         <NavLink

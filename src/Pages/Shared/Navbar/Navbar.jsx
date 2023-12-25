@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './navbar.css'
 import cart from '../../../assets/icon/151-1511569_cart-notifications-free-shopping-cart-favicon-hd-png-removebg-preview.png'
 import { Link } from 'react-router-dom';
 import UseScreenWidth from '../../../Hooks/UseScreenWidth';
 import ActiveLink from '../../../Hooks/ActiveLink/ActiveLink';
+import { IoMdClose, IoMdMenu } from "react-icons/io";
 
 const Navbar = () => {
     const { screenWidth } = UseScreenWidth();
     // console.log(screenWidth)
     const breakPoint = 1024; // tab, mobile < 1024
+    const [isHeader, setIsHeader] = useState(false);
+
+    const handleHeader = () => {
+        setIsHeader(!isHeader);
+    }
+    console.log(isHeader)
 
     const menuItems = [
         <li className='text-[16px] lg:text-[18px] font-medium md:font-extrabold uppercase text-white' key="home"><ActiveLink to={'/'}>Home</ActiveLink></li>,
@@ -109,9 +116,16 @@ const Navbar = () => {
 
 
     return (
-        <header>
-            <div className="navbar py-4 md:py-[24px] xl:px-[55px] flex-col xl:flex-row items-center lg:items-center justify-between gap-6 lg:gap-2">
-                <div className="">
+        <header className='bg-[#212129]'>
+                {
+                    isHeader ?
+                        <IoMdClose onClick={handleHeader} size={35} color='white' className='absolute z-20 top-[6px] md:top-4 right-3 lg:hidden p-1 border rounded' />
+                        :
+                        <IoMdMenu onClick={handleHeader} size={35} color='white' className='absolute z-20 top-[6px] md:top-4 right-3 lg:hidden p-1 border rounded' />
+                }
+
+            <div className={`bg-[#212129] navbar py-4 md:py-5 lg:py-[24px] xl:px-[55px] flex-col xl:flex-row items-center lg:items-center justify-between gap-6 lg:gap-2 duration-500 absolute lg:static z-10  ${isHeader ? '' : 'translate-y-[-388px] lg:translate-y-0'}`}>
+                <div>
                     <Link className="text-white logo font-black text-[22px] lg:text-[28px] leading-7">BISTRO BOSS <br /> <span className='tracking-[5px] lg:tracking-[9.12px] uppercase font-bold text-[16px] lg:text-[18px]'>Restaurant</span></Link>
                 </div>
                 <ul className="flex-none gap-2 lg:gap-5 flex-col lg:flex-row items-center lg:items-center ">
