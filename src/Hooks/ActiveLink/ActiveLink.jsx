@@ -9,7 +9,7 @@ const ActiveLink = ({children, to}) => {
             to={to}
             className={({ isActive, isPending }) =>
                 isActive
-                    ? "active" : ""
+                    ? "text-[#d70c26] lg:text-blue-500" : ""
             }
         >
             {children}

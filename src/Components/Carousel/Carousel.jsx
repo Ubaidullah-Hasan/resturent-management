@@ -77,7 +77,7 @@ const Carousel = ({ carouselItems, autoSlide = false, autoSlideInterval = 3000 }
             </div>
 
             {/* navigation image */}
-            <div className='w-1/2 my-2 mx-auto'>
+            <div className='md:w-1/2 my-2 mx-auto'>
                 <div className='flex'>
                     {
                         carouselItems.map((img, i) => (
