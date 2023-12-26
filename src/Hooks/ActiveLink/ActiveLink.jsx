@@ -10,9 +10,6 @@ const ActiveLink = ({children, to}) => {
             className={({ isActive, isPending }) =>
                 isActive
                     ? "active" : ""
-                    // : isPending
-                    //     ? "pending"
-                    //     : ""
             }
         >
             {children}

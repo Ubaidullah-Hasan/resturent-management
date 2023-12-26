@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 const Footer = () => {
     return (
         <footer>
-            <div className="footer gap-0">
-                <aside className='w-full py-[97px] pe-[156px] bg-[hsl(215,28%,17%)]'>
-                    <div className='text-center ms-auto '>
+            <div className="footer gap-0 md:grid-cols-2">
+                <aside className='md:col-span-1 w-full py-[60px] md:py-[97px] lg:pe-[156px] bg-[hsl(215,28%,17%)] place-items-center lg:place-items-start'>
+                    <div className='text-center lg:ms-auto '>
                         <h3 className='text-[32px] font-[500] text-white w-full mb-6'>CONTACT US</h3>
                         <p className='text-[16px] font-[500] text-white leading-9 w-full'>
                             123 ABS Street, Uni 21, Bangladesh <br />
@@ -18,8 +18,8 @@ const Footer = () => {
                         </p>
                     </div>
                 </aside>
-                <aside className='min-w-full py-[97px] ps-[156px] bg-[#111827] h-full'>
-                    <div className='text-center me-auto'>
+                <aside className='md:col-span-1 min-w-full py-[60px] md:py-[97px] lg:ps-[156px] bg-[#111827] h-full place-items-center lg:place-items-start'>
+                    <div className='text-center lg:me-auto'>
                         <h3 className='text-[32px] font-[500] text-white w-full mb-6'>Follow US</h3>
                         <p className='text-[16px] font-[500] text-white leading-9 w-full'>
                             Join us on social media

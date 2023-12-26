@@ -77,11 +77,11 @@ const Carousel = ({ carouselItems, autoSlide = false, autoSlideInterval = 3000 }
             </div>
 
             {/* navigation image */}
-            <div className='w-1/2 py-1 mx-auto'>
+            <div className='w-1/2 my-2 mx-auto'>
                 <div className='flex'>
                     {
                         carouselItems.map((img, i) => (
-                            <div onClick={()=>handleSlideImg(i)} key={i} className={`border-2 ${current === i ? 'border-orange-500 opacity-100' : 'border-white opacity-70'}`}>
+                            <div onClick={() => handleSlideImg(i)} key={i} className={`border-2 p-1 ${current === i ? 'border-orange-500 opacity-100' : 'border-white opacity-70'}`}>
                                 <img src={img?.img} alt='' className='aspect-video object-cover	' />
                             </div>
                         ))
