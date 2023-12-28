@@ -11,9 +11,14 @@ const PopularMenu = () => {
     }, []);
     console.log(menu)
 
+    // todo: 
+    const handleMenu = () => {
+
+    }
+
 
     return (
-        <div className='section-mt section-w '>
+        <div className='section-mt section-w mb-[60px] md:mb-[80px] lg:mb-[130px]'>
             <SectionHeader
                 title={"FROM OUR MENU"}
                 subHeading={"Check it out"}
@@ -30,6 +35,9 @@ const PopularMenu = () => {
                         <p className='text-[#BB8506] text-[20px]'>${item?.price}</p>
                     </div>
                 ))}
+            </div>
+            <div className='text-center'>
+                <button onClick={handleMenu} className='w-[236px] py-5 px-[30px] border-b-[3px] rounded-b-lg border-[#1F2937] text-[#1F2937] text-[20px] font-[500] uppercase hover:shadow-lg'>View Full Menu</button>
             </div>
         </div>
     );
