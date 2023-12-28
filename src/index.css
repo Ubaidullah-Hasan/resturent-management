@@ -5,3 +5,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .section-mt {
+        @apply mt-[40px] md:mt-[60px] lg:mt-[90px];
+    }
+    .section-mb {
+        @apply mb-[40px] md:mb-[60px] lg:mb-[90px];
+    }
+    .section-w{
+        @apply xl:max-w-1320 mx-2 lg:mx-3 xl:mx-auto ;
+    }
+}

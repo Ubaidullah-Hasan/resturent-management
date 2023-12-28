@@ -13,6 +13,7 @@ import soups from '../../../assets/home/slide2.jpg'
 import pizzas from '../../../assets/home/slide3.jpg'
 import desserts from '../../../assets/home/slide4.jpg'
 import grains from '../../../assets/home/slide5.jpg'
+import SectionHeader from '../../../Components/SectionHeader';
 
 
 
@@ -46,9 +47,9 @@ const Category = () => {
         },
     ];
 
-
     return (
-        <div className='lg:max-w-1320 mx-2 lg:mx-auto mt-[70px] mb-[90px] '>
+        <div className='section-w section-mt'>
+            <SectionHeader title='ORDER ONLINE' subHeading='From 11:00am to 10:00pm' />
             <>
                 <Swiper
                     freeMode={true}
@@ -99,7 +100,7 @@ const Category = () => {
                 >
                     {
                         categories.map((category) => (
-                            <SwiperSlide>
+                            <SwiperSlide key={category?._id}>
                                 <div className='relative'>
                                     <img src={category?.image} alt={category?.category_name} className='sm:h-[350px] lg:h-[450px]  aspect-potrate object-cover mb-[45px]' />
                                     <h1 className='absolute bottom-4 left-0 right-0 text-center text-white text-[20px] md:text-[32px] font-cinzel uppercase' style={{ textShadow: '2px 2px 1px black'}}>{category?.category_name}</h1>
