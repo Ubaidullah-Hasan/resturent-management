@@ -15,7 +15,7 @@ const Navbar = () => {
     const handleHeader = () => {
         setIsHeader(!isHeader);
     }
-    console.log(isHeader)
+    
 
     const menuItems = [
         <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="home"><ActiveLink to={'/'}>Home</ActiveLink></li>,

@@ -5,7 +5,17 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      maxWidth: {
+        '1320': '82.5rem', // 1320px max-w-screen-xl
+      },
+      aspectRatio: {
+        'potrate': '4 / 5',
+      },
+      fontFamily: {
+        'cinzel': 'Cinzel'
+      }
+    },
   },
   plugins: [require("daisyui")],
 }
