@@ -3,7 +3,7 @@ import SectionHeader from '../../../Components/SectionHeader';
 import UseScreenWidth from '../../../Hooks/UseScreenWidth';
 
 const PopularMenu = () => {
-    const { screenWidth } = UseScreenWidth(); console.log(screenWidth)
+    const { screenWidth } = UseScreenWidth(); 
     const smScreen = 640;
     const [menu, setMenu] = useState([]);
     // todo: fetch data from server
@@ -12,7 +12,6 @@ const PopularMenu = () => {
             .then(res => res.json())
             .then(data => setMenu(data.filter(item => item.category === 'popular')));
     }, []);
-    console.log(menu)
 
     // todo: 
     const handleMenu = () => {
