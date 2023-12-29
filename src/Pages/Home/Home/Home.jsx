@@ -5,16 +5,20 @@ import PopularMenu from '../PopularMenu/PopularMenu';
 import CallUs from '../CallUs/CallUs';
 import ChefRecommends from '../ChenRecomments/ChefRecommends';
 import Featured from '../Featured/Featured';
+import Testemonial from '../Testemonial/Testemonial';
+import About from '../About/About';
 
 const Home = () => {
     return (
         <div>
             <Banner></Banner>
             <Category></Category>
+            <About />
             <PopularMenu></PopularMenu>
             <CallUs />
             <ChefRecommends />
             <Featured />
+            <Testemonial />
         </div>
     );
 };
