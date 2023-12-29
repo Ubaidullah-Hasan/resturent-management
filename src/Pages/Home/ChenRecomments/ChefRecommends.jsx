@@ -63,14 +63,14 @@ const ChefRecommends = () => {
     }
 
     return (
-        <section className='section-w section-mb'>
+        <section className='section-w section-mb-130'>
             <SectionHeader
                 title={"CHEF RECOMMENDS"}
                 subHeading={"Should Try"}
             />
             <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-6'>
                 {chefRecommends.slice(0, 3).map((item, index) => (
-                    <div key={item?._id} className='h-[555px] w-full lg:w-[424px] bg-[#F3F3F3]'>
+                    <div key={item?._id} className='h-[555px] w-full xl:w-[424px] bg-[#F3F3F3]'>
                         <img src={item?.foodImg} alt={item?.recipeName} className='w-full h-[300px] object-cover' />
                         <div className='py-[30px] px-[20px] md:py-8 md:px-[40px] text-center '>
                             <h2 className='text-[24px] font-semibold text-[#151515] capitalize mb-3'>{item?.recipeName}</h2>
