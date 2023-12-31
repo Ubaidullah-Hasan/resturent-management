@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SectionHeader from '../../../Components/SectionHeader';
 import UseScreenWidth from '../../../Hooks/UseScreenWidth';
+import PrimaryBtn from '../../Shared/PrimaryBtn/PrimaryBtn';
 
 const PopularMenu = () => {
     const { screenWidth } = UseScreenWidth(); 
@@ -47,9 +48,7 @@ const PopularMenu = () => {
                     </div>
                 ))}
             </div>
-            <div className='text-center'>
-                <button onClick={handleMenu} className='w-[236px] py-5 px-[30px] border-b-[3px] rounded-b-lg border-[#1F2937] text-[#1F2937] text-[20px] font-[500] uppercase hover:shadow-lg'>View Full Menu</button>
-            </div>
+            <PrimaryBtn onClick={handleMenu} btnContent={'View Full Menu'} />
         </section>
     );
 };
