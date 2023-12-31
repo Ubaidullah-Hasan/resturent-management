@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SectionHeader = ({ title, subHeading, color }) => {
-    console.log(color) // pass color like tailwind classs
+    // console.log(color) // pass color like tailwind classs
     
     return (
         <div className=' md:w-[424px] mx-auto text-center mb-[20px] md:mb-[30px] lg:mb-[48px]'>

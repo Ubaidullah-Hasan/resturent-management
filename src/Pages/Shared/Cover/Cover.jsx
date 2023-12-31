@@ -2,13 +2,14 @@ import React from 'react';
 import { Parallax } from 'react-parallax';
 
 
-const Cover = ({ img, pageCover = false, title = 'title', desc = 'desc...' }) => {
+const Cover = ({ img, pageCover = false, title = 'title', desc = 'desc...', className }) => {
     return (
         <Parallax
             blur={10}
             bgImage={img}
             bgImageAlt={title} 
             strength={500}
+            className={className}
         >
             <div className={`${pageCover ? 'pb-[40px] md:pb-[80px] lg:pb-[110px] pt-[70px] md:pt-[150px] lg:pt-[240px]' : 'py-[80px] md:py-[120px] lg:py-[175px]'}`}>
                 {
