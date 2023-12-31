@@ -1,0 +1,12 @@
+@media only screen and (max-width: 600px) {
+
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+        font-size: 20px !important;
+        font-weight: bold;
+        background-color: #d2d2d2bc;
+        color: #CD9003;
+        border-radius: 10%;
+        padding: 10px;
+    }
+}

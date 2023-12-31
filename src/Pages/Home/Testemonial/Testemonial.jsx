@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './testemonial.css'
 import SectionHeader from '../../../Components/SectionHeader';
 import { FaQuoteLeft } from "react-icons/fa";
 
@@ -6,10 +7,10 @@ import { FaQuoteLeft } from "react-icons/fa";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Navigation } from 'swiper/modules';
+import { Navigation, Autoplay } from 'swiper/modules';
 
+// rating
 import Rating from 'react-rating';
-import { CiStar } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
 import UseScreenWidth from '../../../Hooks/UseScreenWidth';
 
@@ -39,8 +40,11 @@ const Testemonial = () => {
 
             <Swiper
                 navigation={true}
-                modules={[Navigation]}
-                className="">
+                modules={[Navigation, Autoplay]}
+                autoplay={{
+                    delay: 5000
+                }}
+                >
                 {
                     reviews.map((review) => (
                         <SwiperSlide key={review?._id}>
@@ -52,7 +56,7 @@ const Testemonial = () => {
                                     readonly={true}
                                 />
                                 <FaQuoteLeft className='mt-[30px] md:mt-[48px] mb-[25px] md:mb-[40px] ' size={screenWidth < 600 ? 50 : 100} />
-                                <p className='text-[20px] w-[80%]'>{review?.details}</p>
+                                <p className='text-[16px] lg:text-[20px] w-[80%]'>{review?.details}</p>
                                 <h2 className='text-[22px] md:text-[32px] text-[#CD9003] uppercase font-medium mt-2'>{review?.name}</h2>
                             </div>
                         </SwiperSlide>

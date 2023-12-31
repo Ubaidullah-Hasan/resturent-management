@@ -10,7 +10,7 @@ const Featured = () => {
                 <SectionHeader
                     subHeading={"Check it out"}
                     title={"FROM OUR MENU "}
-                    color='white'
+                    color='text-white' // pass class like tailwind
                 />
                 <div className='flex flex-col lg:flex-row items-center gap-[30px] xl:gap-[68px] text-white'>
                     <img src={featureImg} alt="Feature" className='w-[300px] lg:w-[450px] xl:w-[648px] h-[200px] lg:h-[300px] xl:h-[400px] object-cover' />
