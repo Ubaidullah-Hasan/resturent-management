@@ -7,10 +7,15 @@ import ChefRecommends from '../ChenRecomments/ChefRecommends';
 import Featured from '../Featured/Featured';
 import Testemonial from '../Testemonial/Testemonial';
 import About from '../About/About';
+import PageTitle from '../../../Components/PageTitle';
 
 const Home = () => {
     return (
         <div>
+            <PageTitle
+                title={"Home"}
+                metaContent={"Resturent ................"}
+            />
             <Banner></Banner>
             <Category></Category>
             <About />
