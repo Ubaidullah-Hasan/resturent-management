@@ -21,7 +21,7 @@ const Navbar = () => {
         <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="home"><ActiveLink to={'/'}>Home</ActiveLink></li>,
         <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="contact"><Link to={'contactus'}>CONTACT us</Link></li>,
         <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="dashboard"><Link to={'/'}>DASHBOARD</Link></li>,
-        <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="menu"><Link to={''}>Our Menu</Link></li>,
+        <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="menu"><Link to={'/menu'}>Our Menu</Link></li>,
         <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="shop"><Link to={''}>Our Shop</Link></li>,
 
         // conditional menu for different screens
