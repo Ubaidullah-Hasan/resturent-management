@@ -7,13 +7,13 @@ import pizzaImg from '../../../assets/menu/pizza-bg.jpg'
 import saladImg from '../../../assets/menu/salad-bg.jpg'
 import soupImg from '../../../assets/menu/soup-bg.jpg'
 import SectionHeader from '../../../Components/SectionHeader';
-import UseMenu from '../../../Hooks/UseMenu';
+import useMenu from '../../../Hooks/useMenu';
 import MenuBox from '../../Shared/MenuBox/MenuBox';
 import PrimaryBtn from '../../Shared/PrimaryBtn/PrimaryBtn';
 
 
 const Menu = () => {
-    const [menu] = UseMenu();
+    const [menu] = useMenu();
     const offered = menu.filter((item) => item?.category === 'offered');
     const dessert = menu.filter((item) => item?.category === 'dessert');
     const pizza = menu.filter((item) => item?.category === 'pizza');

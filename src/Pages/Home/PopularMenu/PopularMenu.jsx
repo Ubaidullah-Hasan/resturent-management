@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import SectionHeader from '../../../Components/SectionHeader';
 import PrimaryBtn from '../../Shared/PrimaryBtn/PrimaryBtn';
-import UseMenu from '../../../Hooks/UseMenu';
+import useMenu from '../../../Hooks/useMenu';
 import MenuBox from '../../Shared/MenuBox/MenuBox';
 
 const PopularMenu = () => {
-    const [menu] = UseMenu();
+    const [menu] = useMenu();
     const popular = menu.filter(item => item.category === 'popular')
 
 
@@ -22,7 +22,7 @@ const PopularMenu = () => {
                 subHeading={"Check it out"}
             />
 
-            <MenuBox data = {popular} />
+            <MenuBox data={popular} />
 
             <PrimaryBtn onClick={handleMenu} btnContent={'View Full Menu'} />
         </section>

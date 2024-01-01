@@ -1,7 +1,7 @@
 import React from 'react';
 import SectionHeader from '../../../Components/SectionHeader';
 import foodImg from '../../../assets/home/slide5.jpg' // todo: remove img
-import { FaPersonWalkingArrowRight } from "react-icons/fa6";
+import FoodBox from '../../Shared/FoodBox/FoodBox';
 
 
 const ChefRecommends = () => {
@@ -58,9 +58,7 @@ const ChefRecommends = () => {
     ];
 
     // todo: write code
-    const handleCart = () => {
 
-    }
 
     return (
         <section className='section-w section-mb-130'>
@@ -68,21 +66,9 @@ const ChefRecommends = () => {
                 title={"CHEF RECOMMENDS"}
                 subHeading={"Should Try"}
             />
-            <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-6'>
-                {chefRecommends.slice(0, 3).map((item, index) => (
-                    <div key={item?._id} className='h-[555px] w-full xl:w-[424px] bg-[#F3F3F3]'>
-                        <img src={item?.foodImg} alt={item?.recipeName} className='w-full h-[300px] object-cover' />
-                        <div className='py-[30px] px-[20px] md:py-8 md:px-[40px] text-center '>
-                            <h2 className='text-[24px] font-semibold text-[#151515] capitalize mb-3'>{item?.recipeName}</h2>
-                            <p className='capitalize text-[#151515] mb-6'>
-                                {item?.desc.length > 60 ? `${item?.desc.slice(0, 60)}...` : item?.desc}
-                                {item?.desc.length > 60 && <FaPersonWalkingArrowRight className='inline ms-2 text-[#BB8506]' />}
-                            </p>
-                            <button onClick={handleCart} className={`shadow hover:shadow-lg text-[#BB8506] uppercase py-[15px] md:py-[20px] px-[22px]  md:px-[30px] text-[18px] md:text-[20px] font-medium rounded-lg border-b-[3px]  ${index === 1 ? 'bg-[#1F2937] border-[#1F2937]' : 'bg-[#E8E8E8] border-[#BB8506]'}`}>Add To cart</button>
-                        </div>
-                    </div>
-                ))}
-            </div>
+            <FoodBox
+                data={chefRecommends.slice(0, 3)}
+            />
         </section>
     );
 };
