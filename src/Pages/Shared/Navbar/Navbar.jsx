@@ -5,8 +5,13 @@ import { Link } from 'react-router-dom';
 import UseScreenWidth from '../../../Hooks/UseScreenWidth';
 import ActiveLink from '../../../Hooks/ActiveLink/ActiveLink';
 import { IoMdClose, IoMdMenu } from "react-icons/io";
+import useMenu from '../../../Hooks/useMenu';
 
 const Navbar = () => {
+    const [menu] = useMenu();
+    const firstCategory = menu[0]?.category; // find first category for show in url
+    console.log(firstCategory)
+
     const { screenWidth } = UseScreenWidth();
     // console.log(screenWidth)
     const breakPoint = 1024; // tab, mobile < 1024
@@ -22,7 +27,7 @@ const Navbar = () => {
         <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="contact"><Link to={'contactus'}>CONTACT us</Link></li>,
         <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="dashboard"><Link to={'/'}>DASHBOARD</Link></li>,
         <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="menu"><Link to={'/menu'}>Our Menu</Link></li>,
-        <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="shop"><Link to={'/shop'}>Our Shop</Link></li>,
+        <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="shop"><Link to={`/shop`}>Our Shop</Link></li>,
 
         // conditional menu for different screens
         screenWidth < breakPoint ?

@@ -3,7 +3,7 @@ import { FaPersonWalkingArrowRight } from "react-icons/fa6";
 
 
 const FoodBox = ({ data, tabSection = false }) => {
-    console.log(data)
+    // console.log(data)
 
     const handleCart = () => {
 

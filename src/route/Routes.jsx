@@ -23,6 +23,10 @@ export const router = createBrowserRouter([
                 path: '/shop',
                 element: <Shop />,
             }
+            // {
+            //     path: '/shop/:category',
+            //     element: <Shop />,
+            // }
         ],
     },
 ]);

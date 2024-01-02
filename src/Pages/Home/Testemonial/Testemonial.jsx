@@ -10,9 +10,9 @@ import 'swiper/css/navigation';
 import { Navigation, Autoplay } from 'swiper/modules';
 
 // rating
-import Rating from 'react-rating';
 import { FaStar } from "react-icons/fa";
 import UseScreenWidth from '../../../Hooks/UseScreenWidth';
+import Rating from '../../../Components/Rating/Rating';
 
 
 
@@ -44,17 +44,17 @@ const Testemonial = () => {
                 autoplay={{
                     delay: 5000
                 }}
-                >
+            >
                 {
                     reviews.map((review) => (
                         <SwiperSlide key={review?._id}>
                             <div className='flex flex-col items-center text-center'>
+                                
                                 <Rating
-                                    initialRating={review?.rating}
-                                    emptySymbol={<FaStar color='#A1A1A1' size={screenWidth < 600 ? 30 : 50} />}
-                                    fullSymbol={<FaStar color='#CD9003' size={screenWidth < 600 ? 30 : 50} />}
-                                    readonly={true}
+                                    value={review?.rating}
+                                    filledColor="#CD9003"
                                 />
+
                                 <FaQuoteLeft className='mt-[30px] md:mt-[48px] mb-[25px] md:mb-[40px] ' size={screenWidth < 600 ? 50 : 100} />
                                 <p className='text-[16px] lg:text-[20px] w-[80%]'>{review?.details}</p>
                                 <h2 className='text-[22px] md:text-[32px] text-[#CD9003] uppercase font-medium mt-2'>{review?.name}</h2>

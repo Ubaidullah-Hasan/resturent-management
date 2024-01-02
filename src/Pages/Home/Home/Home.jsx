@@ -9,6 +9,7 @@ import Testemonial from '../Testemonial/Testemonial';
 import About from '../About/About';
 import PageTitle from '../../../Components/PageTitle';
 
+
 const Home = () => {
     return (
         <div>
@@ -16,6 +17,7 @@ const Home = () => {
                 title={"Home"}
                 metaContent={"Resturent ................"}
             />
+
             <Banner></Banner>
             <Category></Category>
             <About />
@@ -25,6 +27,7 @@ const Home = () => {
             <Featured />
             <Testemonial />
         </div>
+
     );
 };
 

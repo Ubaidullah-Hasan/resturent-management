@@ -3,15 +3,17 @@ import SectionHeader from '../../../Components/SectionHeader';
 import PrimaryBtn from '../../Shared/PrimaryBtn/PrimaryBtn';
 import useMenu from '../../../Hooks/useMenu';
 import MenuBox from '../../Shared/MenuBox/MenuBox';
+import { useNavigate } from 'react-router-dom';
 
 const PopularMenu = () => {
+    const navigate = useNavigate();
     const [menu] = useMenu();
     const popular = menu.filter(item => item.category === 'popular')
 
 
     // todo: 
     const handleMenu = () => {
-
+        navigate('/menu')
     }
 
 
@@ -24,7 +26,7 @@ const PopularMenu = () => {
 
             <MenuBox data={popular} />
 
-            <PrimaryBtn onClick={handleMenu} btnContent={'View Full Menu'} />
+            <PrimaryBtn handleMenu={handleMenu} btnContent={'View Full Menu'} />
         </section>
     );
 };
