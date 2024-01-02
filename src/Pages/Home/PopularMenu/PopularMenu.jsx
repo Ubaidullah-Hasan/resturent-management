@@ -24,9 +24,13 @@ const PopularMenu = () => {
                 subHeading={"Check it out"}
             />
 
-            <MenuBox data={popular} />
+            <MenuBox
+                data={popular}
+                btnContent={'View Full Menu'}
+                toURL='/menu'
+            />
 
-            <PrimaryBtn handleMenu={handleMenu} btnContent={'View Full Menu'} />
+
         </section>
     );
 };

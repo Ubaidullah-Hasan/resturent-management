@@ -35,8 +35,9 @@ const Menu = () => {
             />
             <section className='section-w section-mb'>
                 <SectionHeader title={"TODAY'S OFFER"} subHeading={"Don't miss"} />
-                <MenuBox data={offered} />
-                <PrimaryBtn btnContent={'ORDER YOUR FAVOURITE FOOD'} />
+                <MenuBox
+                    data={offered}
+                />
             </section>
             <>
                 <Cover
@@ -46,8 +47,10 @@ const Menu = () => {
                     className={'section-mb'}
                 />
                 <section className='section-w section-mb'>
-                    <MenuBox data={dessert} />
-                    <PrimaryBtn btnContent={"ORDER YOUR FAVOURITE FOOD"} />
+                    <MenuBox
+                        data={dessert}
+                        toURL={`/shop/dessert`}
+                    />
                 </section>
             </>
             <>
@@ -58,8 +61,10 @@ const Menu = () => {
                     className={'section-mb'}
                 />
                 <section className='section-w section-mb'>
-                    <MenuBox data={pizza} />
-                    <PrimaryBtn btnContent={"ORDER YOUR FAVOURITE FOOD"} />
+                    <MenuBox
+                        data={pizza}
+                        toURL={`/shop/pizza`}
+                    />
                 </section>
             </>
             <>
@@ -70,8 +75,10 @@ const Menu = () => {
                     className={'section-mb'}
                 />
                 <section className='section-w section-mb'>
-                    <MenuBox data={salad} />
-                    <PrimaryBtn btnContent={'ORDER YOUR FAVOURITE FOOD'} />
+                    <MenuBox
+                        data={salad}
+                        toURL={`/shop/salad`}
+                    />
                 </section>
             </>
             <>
@@ -82,8 +89,10 @@ const Menu = () => {
                     className={'section-mb'}
                 />
                 <section className='section-w section-mb'>
-                    <MenuBox data={soup} />
-                    <PrimaryBtn btnContent={'ORDER YOUR FAVOURITE FOOD'} />
+                    <MenuBox
+                        data={soup}
+                        toURL={`/shop/soup`}
+                    />
                 </section>
             </>
 
