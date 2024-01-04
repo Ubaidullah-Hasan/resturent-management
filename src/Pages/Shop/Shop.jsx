@@ -5,6 +5,8 @@ import shopCoverImg from '../../assets/shop/banner2.jpg'
 import ShopTab from './ShopTab/ShopTab';
 
 const Shop = () => {
+
+
     return (
         <div>
             <PageTitle

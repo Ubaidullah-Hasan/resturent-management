@@ -10,7 +10,7 @@ import useMenu from '../../../Hooks/useMenu';
 const Navbar = () => {
     const [menu] = useMenu();
     const firstCategory = menu[0]?.category; // find first category for show in url
-    console.log(firstCategory)
+    // console.log(firstCategory)
 
     const { screenWidth } = UseScreenWidth();
     // console.log(screenWidth)
@@ -24,15 +24,15 @@ const Navbar = () => {
 
     const menuItems = [
         <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="home"><ActiveLink to={'/'}>Home</ActiveLink></li>,
-        <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="contact"><Link to={'contactus'}>CONTACT us</Link></li>,
-        <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="dashboard"><Link to={'/'}>DASHBOARD</Link></li>,
-        <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="menu"><Link to={'/menu'}>Our Menu</Link></li>,
-        <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="shop"><Link to={`/shop`}>Our Shop</Link></li>,
+        <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="contact"><ActiveLink to={'/contactus'}>CONTACT us</ActiveLink></li>,
+        <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="dashboard"><ActiveLink to={'/dashboard'}>DASHBOARD</ActiveLink></li>,
+        <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="menu"><ActiveLink to={'/menu'}>Our Menu</ActiveLink></li>,
+        <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="shop"><ActiveLink to={`/shop/${firstCategory}`}>Our Shop</ActiveLink></li>,
 
         // conditional menu for different screens
         screenWidth < breakPoint ?
             <React.Fragment key={1}>
-                <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="/logout"><Link to={''}>Logout</Link></li>
+                <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="/logout"><ActiveLink to={'/logout'}>Logout</ActiveLink></li>
                 <div className='flex gap-3'>
                     <div className="dropdown dropdown-end" key={"cart"}>
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
@@ -95,7 +95,7 @@ const Navbar = () => {
                     </div>
                 </div>
 
-                <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="/logout"><Link to={''}>Logout</Link></li>
+                <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="/logout"><ActiveLink to={'/logout'}>Logout</ActiveLink></li>
 
                 <div className="dropdown dropdown-end" key={"profile"}>
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
@@ -106,12 +106,12 @@ const Navbar = () => {
                     </div>
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                         <li>
-                            <a className="justify-between">
+                            <ActiveLink className="justify-between">
                                 Profile
                                 <span className="badge">New</span>
-                            </a>
+                            </ActiveLink>
                         </li>
-                        <li><a>Settings</a></li>
+                        <li><ActiveLink>Settings</ActiveLink></li>
                     </ul>
                 </div>
             </React.Fragment>

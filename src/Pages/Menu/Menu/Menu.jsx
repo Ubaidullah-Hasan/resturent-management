@@ -37,6 +37,7 @@ const Menu = () => {
                 <SectionHeader title={"TODAY'S OFFER"} subHeading={"Don't miss"} />
                 <MenuBox
                     data={offered}
+                    toURL={"/shop/offered"}
                 />
             </section>
             <>

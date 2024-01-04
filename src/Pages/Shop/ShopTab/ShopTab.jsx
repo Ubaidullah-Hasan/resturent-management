@@ -1,48 +1,64 @@
 import React, { useEffect, useState } from 'react';
-import useMenu from '../../../Hooks/useMenu';
 import './ShopTab.css'
 import FoodBox from '../../Shared/FoodBox/FoodBox';
+import { Link, useLocation } from 'react-router-dom';
+import useCategories from '../../../Hooks/useCategories';
 
 const ShopTab = () => {
-    const [menu, loading] = useMenu();
-    // console.log(loading)
+
+    const [categories, categoryLoading] = useCategories();
+    const [loading, setLoading] = useState(true);
+    // console.log(categories);
+
+    // select category name when button is clicked in menu page
+    const location = useLocation();
+    // const locationSplit = location?.state?.to?.split('/');
+    const locationSplit = location?.pathname?.split('/');
+    let searchCategory = locationSplit[locationSplit?.length - 1];
+    console.log(searchCategory, "category")
 
 
-    const filteredData = menu.filter(item => item.category !== "offered");
-    const uniqueCategories = [...new Set(filteredData.map(item => item.category))];
-    const [activeTab, setActiveTab] = useState(uniqueCategories[0] || 'salad');
+    const [activeTab, setActiveTab] = useState(searchCategory); 
+    console.log(activeTab, "active tab")
     const [activeCategory, setActiveCategory] = useState([]);
 
     useEffect(() => {
-        const data = menu.filter(item => item.category === activeTab);
-        setActiveCategory(data);
-    }, [activeTab, menu]);
+        fetch(`http://localhost:3000/categories/${searchCategory}`)
+            .then(res => res.json())
+            .then(data => {
+                setActiveCategory(data);
+                setLoading(false);
+                setActiveTab(searchCategory);
+            })
 
-    console.log(activeCategory);
+    }, [searchCategory]);
 
-    if (loading) {
+    console.log(activeCategory)
+
+    if (categoryLoading || loading) {
         return (
-            <div className='mb-5 h-[50px] flex items-center justify-center'>
+            <div className='h-[100vh] flex items-center justify-center'>
                 <span className="loading loading-dots loading-lg"></span>
             </div>
         );
     }
-    
+
 
 
     return (
         <div className='section-w mb-5'>
             <div role="tablist" className="flex flex-col md:flex-row gap-3 md:gap-[20px] lg:gap-[40px] justify-center">
                 {
-                    uniqueCategories.map((category, index) => (
-                        <a
+                    categories.map((category, index) => (
+                        <Link
+                            to={`/shop/${category}`}
                             key={index}
                             role="tab"
                             className={`md:text-[18px] lg:text-[24px] font-bold uppercase text-[#151515] duration-300 cursor-pointer ${activeTab === category ? 'active-tab' : ''}`}
                             onClick={() => setActiveTab(category)}
                         >
                             {category}
-                        </a>
+                        </Link>
                     ))
                 }
             </div>

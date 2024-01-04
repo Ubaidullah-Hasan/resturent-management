@@ -32,7 +32,9 @@ const MenuBox = ({ data, btnContent = 'ORDER YOUR FAVOURITE FOOD', toURL }) => {
                 ))}
             </div>
 
-            <Link to={toURL}>
+            <Link 
+            to={toURL}
+            >
                 <PrimaryBtn btnContent={btnContent} />
             </Link>
         </div>

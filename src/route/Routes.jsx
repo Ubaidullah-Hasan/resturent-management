@@ -20,10 +20,6 @@ export const router = createBrowserRouter([
                 element: <Menu />,
             },
             {
-                path: '/shop',
-                element: <Shop />,
-            },
-            {
                 path: '/shop/:category',
                 element: <Shop />,
             }
