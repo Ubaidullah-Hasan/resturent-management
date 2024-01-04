@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import SectionHeader from '../../../Components/SectionHeader';
-import PrimaryBtn from '../../Shared/PrimaryBtn/PrimaryBtn';
-import useMenu from '../../../Hooks/useMenu';
 import MenuBox from '../../Shared/MenuBox/MenuBox';
-import { useNavigate } from 'react-router-dom';
 
 const PopularMenu = () => {
-    const navigate = useNavigate();
-    const [menu] = useMenu();
-    const popular = menu.filter(item => item.category === 'popular')
+    const [popular, setPopular] = useState([]);
 
 
-    // todo: 
-    const handleMenu = () => {
-        navigate('/menu')
-    }
+    useEffect(() => {
+        fetch(`http://localhost:3000/categories/popular`)
+            .then(res => res.json())
+            .then(data => {
+                setPopular(data);
+            })
+    }, []);
 
 
     return (

@@ -8,18 +8,14 @@ const ShopTab = () => {
 
     const [categories, categoryLoading] = useCategories();
     const [loading, setLoading] = useState(true);
-    // console.log(categories);
 
     // select category name when button is clicked in menu page
     const location = useLocation();
-    // const locationSplit = location?.state?.to?.split('/');
     const locationSplit = location?.pathname?.split('/');
     let searchCategory = locationSplit[locationSplit?.length - 1];
-    console.log(searchCategory, "category")
 
 
     const [activeTab, setActiveTab] = useState(searchCategory); 
-    console.log(activeTab, "active tab")
     const [activeCategory, setActiveCategory] = useState([]);
 
     useEffect(() => {
@@ -33,7 +29,6 @@ const ShopTab = () => {
 
     }, [searchCategory]);
 
-    console.log(activeCategory)
 
     if (categoryLoading || loading) {
         return (

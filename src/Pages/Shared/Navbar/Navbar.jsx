@@ -5,15 +5,13 @@ import { Link } from 'react-router-dom';
 import UseScreenWidth from '../../../Hooks/UseScreenWidth';
 import ActiveLink from '../../../Hooks/ActiveLink/ActiveLink';
 import { IoMdClose, IoMdMenu } from "react-icons/io";
-import useMenu from '../../../Hooks/useMenu';
+import useCategories from '../../../Hooks/useCategories';
 
 const Navbar = () => {
-    const [menu] = useMenu();
-    const firstCategory = menu[0]?.category; // find first category for show in url
-    // console.log(firstCategory)
+    const [categories] = useCategories();
+    const firstCategory = categories[0]; 
 
     const { screenWidth } = UseScreenWidth();
-    // console.log(screenWidth)
     const breakPoint = 1024; // tab, mobile < 1024
     const [isHeader, setIsHeader] = useState(false);
 
