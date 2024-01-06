@@ -5,7 +5,7 @@ import shopCoverImg from '../../assets/shop/banner2.jpg'
 import ShopTab from './ShopTab/ShopTab';
 
 const Shop = () => {
-
+    
 
     return (
         <div>
@@ -19,7 +19,7 @@ const Shop = () => {
                 desc='Would you like to try a dish?'
                 className={'section-mb-130'}
             />
-            
+
             <ShopTab />
         </div>
     );

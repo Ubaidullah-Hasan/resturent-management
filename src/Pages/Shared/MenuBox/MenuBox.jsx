@@ -8,6 +8,8 @@ const MenuBox = ({ data, btnContent = 'ORDER YOUR FAVOURITE FOOD', toURL }) => {
     const { screenWidth } = UseScreenWidth();
     const smScreen = 640;
 
+    
+
     return (
         <div>
             <div className='grid lg:grid-cols-2 gap-6 lg:mb-[48px]'>
@@ -32,8 +34,8 @@ const MenuBox = ({ data, btnContent = 'ORDER YOUR FAVOURITE FOOD', toURL }) => {
                 ))}
             </div>
 
-            <Link 
-            to={toURL}
+            <Link
+                to={toURL}
             >
                 <PrimaryBtn btnContent={btnContent} />
             </Link>

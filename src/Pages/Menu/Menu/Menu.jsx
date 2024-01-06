@@ -9,16 +9,16 @@ import soupImg from '../../../assets/menu/soup-bg.jpg'
 import SectionHeader from '../../../Components/SectionHeader';
 import useMenu from '../../../Hooks/useMenu';
 import MenuBox from '../../Shared/MenuBox/MenuBox';
-import PrimaryBtn from '../../Shared/PrimaryBtn/PrimaryBtn';
 
 
 const Menu = () => {
-    const [menu] = useMenu();
+    const [menu, loading] = useMenu();
     const offered = menu.filter((item) => item?.category === 'offered');
     const dessert = menu.filter((item) => item?.category === 'dessert');
     const pizza = menu.filter((item) => item?.category === 'pizza');
     const salad = menu.filter((item) => item?.category === 'salad');
     const soup = menu.filter((item) => item?.category === 'soup');
+
 
 
     return (
@@ -33,69 +33,78 @@ const Menu = () => {
                 desc='Would you like to try a dish?'
                 className='section-mb-130'
             />
-            <section className='section-w section-mb'>
-                <SectionHeader title={"TODAY'S OFFER"} subHeading={"Don't miss"} />
-                <MenuBox
-                    data={offered}
-                    toURL={"/shop/offered"}
-                />
-            </section>
-            <>
-                <Cover
-                    img={dessertImg}
-                    title='DESSERTS'
-                    desc='Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
-                    className={'section-mb'}
-                />
-                <section className='section-w section-mb'>
-                    <MenuBox
-                        data={dessert}
-                        toURL={`/shop/dessert`}
-                    />
-                </section>
-            </>
-            <>
-                <Cover
-                    img={pizzaImg}
-                    title='PIZZA'
-                    desc='Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
-                    className={'section-mb'}
-                />
-                <section className='section-w section-mb'>
-                    <MenuBox
-                        data={pizza}
-                        toURL={`/shop/pizza`}
-                    />
-                </section>
-            </>
-            <>
-                <Cover
-                    img={saladImg}
-                    title='SALADS'
-                    desc='Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
-                    className={'section-mb'}
-                />
-                <section className='section-w section-mb'>
-                    <MenuBox
-                        data={salad}
-                        toURL={`/shop/salad`}
-                    />
-                </section>
-            </>
-            <>
-                <Cover
-                    img={soupImg}
-                    title='SOUPS'
-                    desc='Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
-                    className={'section-mb'}
-                />
-                <section className='section-w section-mb'>
-                    <MenuBox
-                        data={soup}
-                        toURL={`/shop/soup`}
-                    />
-                </section>
-            </>
+            {loading ? (
+                <div className='h-[100vh] flex items-center justify-center'>
+                    <span className="loading loading-dots loading-lg"></span>
+                </div>
+            )
+                :
+                <>
+                    <section className='section-w section-mb'>
+                        <SectionHeader title={"TODAY'S OFFER"} subHeading={"Don't miss"} />
+                        <MenuBox
+                            data={offered}
+                            toURL={"/shop/offered"}
+                        />
+                    </section>
+                    <>
+                        <Cover
+                            img={dessertImg}
+                            title='DESSERTS'
+                            desc='Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+                            className={'section-mb'}
+                        />
+                        <section className='section-w section-mb'>
+                            <MenuBox
+                                data={dessert}
+                                toURL={`/shop/dessert`}
+                            />
+                        </section>
+                    </>
+                    <>
+                        <Cover
+                            img={pizzaImg}
+                            title='PIZZA'
+                            desc='Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+                            className={'section-mb'}
+                        />
+                        <section className='section-w section-mb'>
+                            <MenuBox
+                                data={pizza}
+                                toURL={`/shop/pizza`}
+                            />
+                        </section>
+                    </>
+                    <>
+                        <Cover
+                            img={saladImg}
+                            title='SALADS'
+                            desc='Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+                            className={'section-mb'}
+                        />
+                        <section className='section-w section-mb'>
+                            <MenuBox
+                                data={salad}
+                                toURL={`/shop/salad`}
+                            />
+                        </section>
+                    </>
+                    <>
+                        <Cover
+                            img={soupImg}
+                            title='SOUPS'
+                            desc='Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+                            className={'section-mb'}
+                        />
+                        <section className='section-w section-mb'>
+                            <MenuBox
+                                data={soup}
+                                toURL={`/shop/soup`}
+                            />
+                        </section>
+                    </>
+                </>
+            }
 
         </div>
     );

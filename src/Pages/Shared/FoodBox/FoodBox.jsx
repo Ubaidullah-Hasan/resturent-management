@@ -24,7 +24,7 @@ const FoodBox = ({ data, tabSection = false }) => {
                                     {item?.recipe?.length > 60 ? `${item?.recipe.slice(0, 60)}...` : item?.recipe}
                                     {item?.recipe?.length > 60 && <FaPersonWalkingArrowRight className='inline ms-2 text-[#BB8506]' />}
                                 </p>
-                                <button onClick={handleCart} className={`shadow hover:shadow-lg text-[#BB8506] uppercase py-[15px] md:py-[20px] px-[22px]  md:px-[30px] text-[18px] md:text-[20px] font-medium rounded-lg border-b-[3px]  ${index === 1 ? 'bg-[#1F2937] border-[#1F2937]' : 'bg-[#E8E8E8] border-[#BB8506]'}`}>Add To cart</button>
+                                <button onClick={handleCart} className={`shadow hover:shadow-lg duration-300 hover:bg-[#1F2937] text-[#BB8506] uppercase py-[15px] md:py-[20px] px-[22px]  md:px-[30px] text-[18px] md:text-[20px] font-medium rounded-lg border-b-[3px]  ${index === 1 ? 'bg-[#1F2937] hover:bg-[#E8E8E8] border-[#1F2937]' : 'bg-[#E8E8E8] border-[#BB8506]'}`}>Add To cart</button>
                             </div>
                         </div>
                     ))
