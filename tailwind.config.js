@@ -14,6 +14,9 @@ export default {
       },
       fontFamily: {
         'cinzel': 'Cinzel'
+      },
+      colors: {
+        'primary': '#D1A054'
       }
     },
   },

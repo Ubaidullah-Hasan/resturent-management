@@ -9,7 +9,7 @@ import useCategories from '../../../Hooks/useCategories';
 
 const Navbar = () => {
     const [categories] = useCategories();
-    const firstCategory = categories[0]; 
+    const firstCategory = categories[0];
 
     const { screenWidth } = UseScreenWidth();
     const breakPoint = 1024; // tab, mobile < 1024
@@ -18,7 +18,7 @@ const Navbar = () => {
     const handleHeader = () => {
         setIsHeader(!isHeader);
     }
-    
+
 
     const menuItems = [
         <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="home"><ActiveLink to={'/'}>Home</ActiveLink></li>,
@@ -29,7 +29,9 @@ const Navbar = () => {
 
         // conditional menu for different screens
         screenWidth < breakPoint ?
+            // for tab and mobile devices
             <React.Fragment key={1}>
+                <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="/logout"><ActiveLink to={'/login'}>login</ActiveLink></li>
                 <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="/logout"><ActiveLink to={'/logout'}>Logout</ActiveLink></li>
                 <div className='flex gap-3'>
                     <div className="dropdown dropdown-end" key={"cart"}>
@@ -93,6 +95,7 @@ const Navbar = () => {
                     </div>
                 </div>
 
+                <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="/logout"><ActiveLink to={'/login'}>Login</ActiveLink></li>
                 <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="/logout"><ActiveLink to={'/logout'}>Logout</ActiveLink></li>
 
                 <div className="dropdown dropdown-end" key={"profile"}>
@@ -120,12 +123,12 @@ const Navbar = () => {
 
     return (
         <header className='bg-[#212129]/30 fixed z-30 w-full'>
-                {
-                    isHeader ?
-                        <IoMdClose onClick={handleHeader} size={35} color='white' className='absolute z-20 top-[6px] md:top-4 right-3 lg:hidden p-1 border rounded' />
-                        :
-                        <IoMdMenu onClick={handleHeader} size={35} color='white' className='absolute z-20 top-[6px] md:top-4 right-3 lg:hidden p-1 border rounded' />
-                }
+            {
+                isHeader ?
+                    <IoMdClose onClick={handleHeader} size={35} color='white' className='absolute z-20 top-[6px] md:top-4 right-3 lg:hidden p-1 border rounded' />
+                    :
+                    <IoMdMenu onClick={handleHeader} size={35} color='white' className='absolute z-20 top-[6px] md:top-4 right-3 lg:hidden p-1 border rounded' />
+            }
 
             <div className={`bg-[#212129] lg:bg-[#212129]/0 border-b-2 border-white/50 navbar py-4 md:py-5 lg:py-[24px] xl:px-[55px] flex-col xl:flex-row items-center lg:items-center justify-between gap-6 lg:gap-2 duration-500 absolute lg:static z-10  ${isHeader ? '' : 'translate-y-[-388px] lg:translate-y-0'}`}>
                 <div>
