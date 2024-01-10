@@ -31,7 +31,7 @@ const Navbar = () => {
         screenWidth < breakPoint ?
             // for tab and mobile devices
             <React.Fragment key={1}>
-                <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="/logout"><ActiveLink to={'/login'}>login</ActiveLink></li>
+                <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="/login"><ActiveLink to={'/login'}>login</ActiveLink></li>
                 <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="/logout"><ActiveLink to={'/logout'}>Logout</ActiveLink></li>
                 <div className='flex gap-3'>
                     <div className="dropdown dropdown-end" key={"cart"}>
@@ -95,7 +95,7 @@ const Navbar = () => {
                     </div>
                 </div>
 
-                <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="/logout"><ActiveLink to={'/login'}>Login</ActiveLink></li>
+                <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="/login"><ActiveLink to={'/login'}>Login</ActiveLink></li>
                 <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="/logout"><ActiveLink to={'/logout'}>Logout</ActiveLink></li>
 
                 <div className="dropdown dropdown-end" key={"profile"}>

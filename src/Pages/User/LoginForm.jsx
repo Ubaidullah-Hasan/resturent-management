@@ -1,0 +1,52 @@
+import { RiLoginCircleLine } from 'react-icons/ri'; // Using React Icons for login button
+import { HiOutlineMail } from "react-icons/hi";
+import { IoKeyOutline } from "react-icons/io5";
+import { FaRegFaceRollingEyes } from "react-icons/fa6";
+import { PiSmileyXEyes } from "react-icons/pi";
+import { FaFacebookF, FaGoogle } from "react-icons/fa";
+import SocialLogin from './SocialLogin';
+
+const LoginForm = ({ isPassword, setIsPassword, setToggle }) => {
+    return (
+        <div>
+            <h2 className="text-2xl font-cinzel font-extrabold uppercase mb-4">
+                Welcome Back
+            </h2>
+            <form>
+                <div className="mb-4 flex items-center border rounded-md p-2">
+                    <HiOutlineMail className="mr-2" />
+                    <input type="email" placeholder="Email" className="flex-1 outline-none" />
+                </div>
+
+                <div className="mb-4 flex items-center border rounded-md p-2">
+                    <IoKeyOutline className="mr-2" />
+                    <input type={isPassword ? "password" : "text"} placeholder="Password" className="flex-1 outline-none" />
+                    {
+                        isPassword ?
+                            <FaRegFaceRollingEyes onClick={() => setIsPassword(!isPassword)} className="ms-2 animate-bounce shadow-md" />
+                            :
+                            <PiSmileyXEyes onClick={() => setIsPassword(!isPassword)} className="ms-2 animate-bounce shadow-md" size={19} />
+                    }
+                </div>
+
+                <div className='mb-4 flex gap-5 justify-between divide-x'>
+                    {/* todo: after complete site then work with remember me */}
+                    <div className='w-1/2 text-start'>
+                        <input className='mr-3 cursor-pointer accent-green-600' type="checkbox" id="rememberMe" />
+                        <label className='cursor-pointer' htmlFor="rememberMe">Remember Me</label>
+                    </div>
+                    <p onClick={() => setToggle(3)} className='cursor-pointer w-1/2 text-end'>Forgot Password?</p>
+                </div>
+
+                <button type="submit" className="mb-4 duration-300 bg-green-600 hover:bg-green-700 text-white p-2 rounded-md flex items-center justify-center w-full font-bold">
+                    <RiLoginCircleLine className="mr-2" />
+                    Login
+                </button>
+            </form>
+
+            <SocialLogin />
+        </div>
+    );
+};
+
+export default LoginForm;
