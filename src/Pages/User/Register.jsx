@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { RiUserAddLine } from 'react-icons/ri';
 import { HiOutlineMail } from "react-icons/hi";
 import { FaCamera } from "react-icons/fa";
@@ -6,11 +6,29 @@ import { IoKeyOutline } from "react-icons/io5";
 import { FaRegFaceRollingEyes } from 'react-icons/fa6';
 import { PiSmileyXEyes } from 'react-icons/pi';
 import SocialLogin from './SocialLogin';
+import { AuthContext } from '../../Providers/AuthProviders';
 
 const Register = ({ isPassword, setIsPassword, setToggle }) => {
+    const { userRegister, updateUser } = useContext(AuthContext);
+    const [error, setError] = useState(false);
 
     const handleForm = (e) => {
         e.preventDefault();
+        const form = e.target;
+        const image = form.image.value;
+        const name = form.name.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        userRegister(email, password)
+            .then(succ => {
+                console.log(succ.user)
+                updateUser(name, image)
+                    .then(() => {console.log("User updated successfully")})
+                    .catch((err) => {console.log(err)})
+            }).catch(err => {
+                console.error(err)
+                setError(true);
+            })
     }
 
 

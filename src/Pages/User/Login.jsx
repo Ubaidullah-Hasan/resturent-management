@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import loginImg from '../../assets/login/login.jpg'
 import loginBG from '../../assets/login/loginBg.jpg'
 import { FaCircleUser } from "react-icons/fa6";
@@ -8,7 +8,7 @@ import LoginForm from './LoginForm';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Register from './Register';
 import Forgot from './Forgot';
-
+import { AuthContext } from '../../Providers/AuthProviders';
 
 
 
@@ -19,6 +19,7 @@ const Login = () => {
     const lastPathName = urlDevide[urlDevide.length - 1];
     const [toggle, setToggle] = useState(JSON.parse(localStorage.getItem('authToggle')) || 1); 
     const [isPassword, setIsPassword] = useState(true);
+    const { userLogin } = useContext(AuthContext);
 
     if (lastPathName === 'login') {
         localStorage.setItem('authToggle', JSON.stringify(1));
@@ -89,9 +90,7 @@ const Login = () => {
 
                     {/* todo: for forgot */}
                     <div className={toggle === 3 ? "block" : "hidden"}>
-                        <Forgot
-
-                        />
+                        <Forgot />
                     </div>
 
                 </div>

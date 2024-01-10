@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { HiOutlineMail } from 'react-icons/hi';
 import { IoSettings } from "react-icons/io5";
 import forgetImg from '../../assets/login/resetPass.png'
 import './forgot.css';
+import { AuthContext } from '../../Providers/AuthProviders';
 
 const Forgot = () => {
+    const { resetPassword } = useContext(AuthContext);
     const [isError, setIsError] = useState(false);
+    const [isSuccess, setIsSuccess] = useState('');
 
-    const handleForm = () => {
-
+    const handleForm = (e) => {
+        e.preventDefault();
+        const email = e.target.email.value;
+        console.log(email);
+        resetPassword(email)
+            .then(res => {
+                setIsSuccess('Check email for password reset!')
+            }).catch(err => {
+                console.error(err)
+            })
     };
 
     return (
@@ -25,6 +36,8 @@ const Forgot = () => {
                 </div>
 
                 {isError && <p className='text-red-500 mb-8'>{isError}</p>}
+
+                {isSuccess && <p className='text-green-500 mb-4'>{isSuccess}</p>}
 
                 <button type="submit" className="forgot mb-4 duration-300 bg-green-600 hover:bg-green-700 text-white p-2 rounded-md flex items-center justify-center w-full font-bold">
                     <IoSettings className="mr-2 icon" />

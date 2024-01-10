@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { GoogleAuthProvider, createUserWithEmailAndPassword, deleteUser, getAuth, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { app } from '../Firebase/firebase';
-export const AuthContext = createContext();
+export const AuthContext = createContext(null);
 
 const AuthProviders = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -21,22 +21,34 @@ const AuthProviders = ({ children }) => {
     // google login
     const googleProvider = new GoogleAuthProvider();
     const googleLogin = (email, password) => {
+        setAuthLoading(true);
         return signInWithPopup(auth, googleProvider);
     };
+
+    // update user profile
+    const updateUser = (name, imgURL) => {
+        setAuthLoading(true);
+        return updateProfile(auth.currentUser, {
+            displayName: name, photoURL: imgURL
+        })
+    }
 
 
     // log out
     const logOut = () => {
+        setAuthLoading(true);
         return signOut(auth);
     }
 
     // reset password
     const resetPassword = (email) => {
+        setAuthLoading(true);
         return sendPasswordResetEmail(auth, email);
     }
 
     // delete account
     const deleteAccount = () => {
+        setAuthLoading(true);
         return deleteUser(auth.currentUser);
     }
 
@@ -59,6 +71,7 @@ const AuthProviders = ({ children }) => {
         userRegister,
         userLogin,
         googleLogin,
+        updateUser,
         logOut,
         resetPassword,
         deleteAccount,
