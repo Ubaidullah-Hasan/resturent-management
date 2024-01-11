@@ -8,16 +8,18 @@ import SocialLogin from './SocialLogin';
 import { AuthContext } from '../../Providers/AuthProviders';
 import { useNavigate } from 'react-router-dom';
 import loadingGifImg from '../../assets/login/rocket.gif';
+import PageTitle from '../../Components/PageTitle';
 
 
 const LoginForm = ({ isPassword, setIsPassword, setToggle }) => {
+    
     const navigate = useNavigate();
     const { userLogin } = useContext(AuthContext);
     const [error, setError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
     const handleForm = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         setIsLoading(true);
         const form = e.target;
         const email = form.email.value;
@@ -27,6 +29,7 @@ const LoginForm = ({ isPassword, setIsPassword, setToggle }) => {
                 navigate('/');
                 setIsLoading(false);
                 setError(false);
+                form.reset();
             }).catch(err => {
                 setError(true);
                 setIsLoading(false);
@@ -35,6 +38,9 @@ const LoginForm = ({ isPassword, setIsPassword, setToggle }) => {
 
     return (
         <div>
+            <PageTitle
+                title={'Login'}
+            />
             <h2 className="text-2xl font-cinzel font-extrabold uppercase mb-4">
                 Welcome Back
             </h2>

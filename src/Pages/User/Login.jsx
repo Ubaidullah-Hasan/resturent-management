@@ -8,7 +8,7 @@ import LoginForm from './LoginForm';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Register from './Register';
 import Forgot from './Forgot';
-import { AuthContext } from '../../Providers/AuthProviders';
+import PageTitle from '../../Components/PageTitle';
 
 
 
@@ -17,9 +17,8 @@ const Login = () => {
     const location = useLocation();
     const urlDevide = location.pathname.split('/');
     const lastPathName = urlDevide[urlDevide.length - 1];
-    const [toggle, setToggle] = useState(JSON.parse(localStorage.getItem('authToggle')) || 1); 
+    const [toggle, setToggle] = useState(JSON.parse(localStorage.getItem('authToggle')) || 1);
     const [isPassword, setIsPassword] = useState(true);
-    const { userLogin } = useContext(AuthContext);
 
     if (lastPathName === 'login') {
         localStorage.setItem('authToggle', JSON.stringify(1));

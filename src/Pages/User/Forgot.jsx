@@ -4,26 +4,30 @@ import { IoSettings } from "react-icons/io5";
 import forgetImg from '../../assets/login/resetPass.png'
 import './forgot.css';
 import { AuthContext } from '../../Providers/AuthProviders';
+import PageTitle from '../../Components/PageTitle';
 
 const Forgot = () => {
     const { resetPassword } = useContext(AuthContext);
-    const [isError, setIsError] = useState(false);
+    const [isError, setIsError] = useState('');
     const [isSuccess, setIsSuccess] = useState('');
 
     const handleForm = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
-        console.log(email);
         resetPassword(email)
             .then(res => {
-                setIsSuccess('Check email for password reset!')
+                setIsSuccess('Check email for password reset!');
+                setIsError(false);
             }).catch(err => {
-                console.error(err)
+                setIsError("Email is not valid!");
             })
     };
 
     return (
         <div>
+            <PageTitle
+                title='forgot'
+            />
             <img src={forgetImg} className='w-14 mx-auto mb-4' alt="Forget Image" />
             <h2 className="text-2xl font-cinzel font-extrabold uppercase mb-2">
                 Forgot Password
@@ -35,7 +39,7 @@ const Forgot = () => {
                     <input name='email' type="email" required placeholder="Email" className="flex-1 outline-none" />
                 </div>
 
-                {isError && <p className='text-red-500 mb-8'>{isError}</p>}
+                {isError && <p className='text-red-500 mb-4'>{isError}</p>}
 
                 {isSuccess && <p className='text-green-500 mb-4'>{isSuccess}</p>}
 

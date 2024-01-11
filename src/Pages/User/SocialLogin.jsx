@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaFacebookF, FaGoogle } from 'react-icons/fa6';
+import { AuthContext } from '../../Providers/AuthProviders';
 
 const SocialLogin = () => {
+    const { googleLogin } = useContext(AuthContext);
+
+    const handleGoogle = () => {
+        googleLogin()
+        .then(() => console.log('Login successful'))
+        .catch((err) => console.log(err.message))
+    }
+
     return (
         <div>
             {/* or devider */}
@@ -13,7 +22,7 @@ const SocialLogin = () => {
 
             {/* google and facebook login */}
             <div className='flex justify-between gap-8'>
-                <button className='duration-300 grow py-3 rounded-md border border-[#EA4335] hover:bg-[#EA4335] text-[#EA4335] hover:text-white flex items-center justify-center'>
+                <button onClick={handleGoogle} className='duration-300 grow py-3 rounded-md border border-[#EA4335] hover:bg-[#EA4335] text-[#EA4335] hover:text-white flex items-center justify-center'>
                     <FaGoogle />
                 </button>
                 <button className='duration-300 grow py-3 rounded-md border border-[#316FF6] hover:bg-[#316FF6] text-[#316FF6] hover:text-white flex items-center justify-center'>
