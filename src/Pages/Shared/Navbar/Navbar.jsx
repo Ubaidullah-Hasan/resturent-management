@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './navbar.css'
 import cart from '../../../assets/icon/151-1511569_cart-notifications-free-shopping-cart-favicon-hd-png-removebg-preview.png'
 import { Link } from 'react-router-dom';
@@ -6,8 +6,12 @@ import UseScreenWidth from '../../../Hooks/UseScreenWidth';
 import ActiveLink from '../../../Hooks/ActiveLink/ActiveLink';
 import { IoMdClose, IoMdMenu } from "react-icons/io";
 import useCategories from '../../../Hooks/useCategories';
+import { AuthContext } from '../../../Providers/AuthProviders';
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext);
+    const profileImg = user?.photoURL || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg";
+
     const [categories] = useCategories();
     const firstCategory = categories[0];
 
@@ -17,6 +21,16 @@ const Navbar = () => {
 
     const handleHeader = () => {
         setIsHeader(!isHeader);
+    }
+
+    const handleLogOut = () => {
+        logOut()
+            .then(succ => {
+
+            })
+            .catch(err => {
+                console.log(err.message)
+            })
     }
 
 
@@ -31,8 +45,12 @@ const Navbar = () => {
         screenWidth < breakPoint ?
             // for tab and mobile devices
             <React.Fragment key={1}>
-                <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="/login"><ActiveLink to={'/login'}>login</ActiveLink></li>
-                <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="/logout"><ActiveLink to={'/logout'}>Logout</ActiveLink></li>
+                {
+                    user ?
+                        <li onClick={handleLogOut} className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white cursor-pointer' key="/logout">Logout</li>
+                        :
+                        <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="/login"><ActiveLink to={'/login'}>login</ActiveLink></li>
+                }
                 <div className='flex gap-3'>
                     <div className="dropdown dropdown-end" key={"cart"}>
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
@@ -57,8 +75,7 @@ const Navbar = () => {
                     <div className="dropdown dropdown-end" key={"profile"}>
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
-                                {/* todo: change img */}
-                                <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                <img alt="Tailwind CSS Navbar component" src={profileImg} />
                             </div>
                         </div>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
@@ -95,14 +112,17 @@ const Navbar = () => {
                     </div>
                 </div>
 
-                <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="/login"><ActiveLink to={'/login'}>Login</ActiveLink></li>
-                <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="/logout"><ActiveLink to={'/logout'}>Logout</ActiveLink></li>
+                {
+                    user ?
+                        <li onClick={handleLogOut} className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white cursor-pointer' key="/logout">Logout</li>
+                        :
+                        <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="/login"><ActiveLink to={'/login'}>login</ActiveLink></li>
+                }
 
                 <div className="dropdown dropdown-end" key={"profile"}>
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">
-                            {/* todo: change img */}
-                            <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                            <img alt="Tailwind CSS Navbar component" src={profileImg} />
                         </div>
                     </div>
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">

@@ -11,8 +11,8 @@ import loadingGifImg from '../../assets/login/rocket.gif';
 import PageTitle from '../../Components/PageTitle';
 
 
-const LoginForm = ({ isPassword, setIsPassword, setToggle }) => {
-    
+const LoginForm = ({ isPassword, setIsPassword, setToggle, fromURL }) => {
+
     const navigate = useNavigate();
     const { userLogin } = useContext(AuthContext);
     const [error, setError] = useState(false);
@@ -26,7 +26,7 @@ const LoginForm = ({ isPassword, setIsPassword, setToggle }) => {
         const password = form.password.value;
         userLogin(email, password)
             .then(res => {
-                navigate('/');
+                navigate(fromURL);
                 setIsLoading(false);
                 setError(false);
                 form.reset();
@@ -55,9 +55,9 @@ const LoginForm = ({ isPassword, setIsPassword, setToggle }) => {
                     <input required name='password' type={isPassword ? "password" : "text"} placeholder="Password" className="flex-1 outline-none" />
                     {
                         isPassword ?
-                            <FaRegFaceRollingEyes onClick={() => setIsPassword(!isPassword)} className="ms-2 animate-bounce shadow-md" />
+                            <FaRegFaceRollingEyes onClick={() => setIsPassword(!isPassword)} className="ms-2 cursor-pointer animate-bounce shadow-md" />
                             :
-                            <PiSmileyXEyes onClick={() => setIsPassword(!isPassword)} className="ms-2 animate-bounce shadow-md" size={19} />
+                            <PiSmileyXEyes onClick={() => setIsPassword(!isPassword)} className="ms-2 cursor-pointer animate-bounce shadow-md" size={19} />
                     }
                 </div>
 
@@ -85,7 +85,9 @@ const LoginForm = ({ isPassword, setIsPassword, setToggle }) => {
 
             </form>
 
-            <SocialLogin />
+            <SocialLogin
+                fromURL={fromURL}
+            />
         </div>
     );
 };

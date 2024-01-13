@@ -11,47 +11,94 @@ import loadingGifImg from '../../assets/login/rocket.gif';
 import { useNavigate } from 'react-router-dom';
 import PageTitle from '../../Components/PageTitle';
 
+// todo: sweet alert doesnot work
+// import Swal from 'sweetalert2'
+// import Swal from 'sweetalert2/dist/sweetalert2.js'
 
-const Register = ({ isPassword, setIsPassword }) => {
+
+
+const Register = ({ isPassword, setIsPassword, fromURL }) => {
     const navigate = useNavigate();
     const { userRegister, updateUser } = useContext(AuthContext);
-    const [error, setError] = useState(false);
+    const [error, setError] = useState('');
     const [registerLoading, setRegisterLoading] = useState(false);
     const [regexError, setRegexError] = useState('');
 
-    const handleForm = (e) => {
+    const handleForm = async (e) => {
         e.preventDefault();
         setRegisterLoading(true);
         const form = e.target;
-        const image = form.image.value; console.log(image)
         const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
         const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{8,}$/;
-        if(!passwordRegex.test(password)) {
+        if (!passwordRegex.test(password)) {
             setRegexError('Password length must be 8 characters long, contains at least one digit, one lowercase letter, one uppercase letter and one special character!')
             setRegisterLoading(false)
             return;
         }
         setRegexError('');
 
-        userRegister(email, password)
-            .then(() => {
-                setError(false);
-                updateUser(name, image)
-                    .then(() => {
+
+        const imageFile = form.image.files[0];
+        if (imageFile) {
+            const formData = new FormData();
+            formData.append('key', import.meta.env.VITE_IMGBBAPIKEY);
+            formData.append('image', imageFile);
+
+            const response = await fetch('https://api.imgbb.com/1/upload', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                const imageUrl = result.data.url;
+
+                userRegister(email, password)
+                    .then((succ) => {
+                        updateUser(name, imageUrl)
+                            .then(() => {
+                                setRegisterLoading(false);
+                                setError("");
+                                navigate(fromURL);
+                                form.reset();
+                            })
+                            .catch((err) => {
+                                setError("Update user failed!");
+                                setRegisterLoading(false);
+                            })
+                    }).catch(err => {
+                        setError("Email already registered!");
                         setRegisterLoading(false);
-                        setError(false);
-                        navigate('/');
                     })
-                    .catch((err) => {
-                        setError(true)
-                        setRegisterLoading(false);
-                    })
-            }).catch(err => {
-                setError(true);
-                setRegisterLoading(false);
-            })
+            }
+        } else {
+            userRegister(email, password)
+                .then(() => {
+                    updateUser(name, image)
+                        .then((succ) => {
+                            setRegisterLoading(false);
+                            setError('');
+                            navigate(fromURL);
+                            form.reset();
+                        })
+                        .catch((err) => {
+                            setError('Update user failed! ');
+                            setRegisterLoading(false);
+                        })
+                }).catch(err => {
+                    setError("Email already registered!");
+                    setRegisterLoading(false);
+                })
+        }
+    }
+
+
+    const [imgFileName, setImgFileName] = useState('');
+    const handleProfile = (event) => {
+        const fileName = event.target.files[0].name;
+        setImgFileName(fileName);
     }
 
 
@@ -65,9 +112,9 @@ const Register = ({ isPassword, setIsPassword }) => {
             </h2>
             <form onSubmit={handleForm}>
                 <div className="mb-4 flex items-center border rounded-md p-2">
-                    <label htmlFor="img"><FaCamera className="mr-2" /></label>
-                    <input name='image' type="file" accept="image/*" id='img' className="flex-1 outline-none hidden" />
-                    <label htmlFor="img" className='capitalize text-gray-400'>Click me to upload image</label>
+                    <label htmlFor="img"><FaCamera className="mr-2 cursor-pointer" /></label>
+                    <input onChange={handleProfile} name='image' type="file" accept="image/*" id='img' className="flex-1 outline-none hidden" />
+                    <label htmlFor="img" className='capitalize text-gray-400 cursor-pointer'>{imgFileName || 'Click me to upload image'}</label>
                 </div>
 
                 <div className="mb-4 flex items-center border rounded-md p-2">
@@ -79,16 +126,16 @@ const Register = ({ isPassword, setIsPassword }) => {
                     <HiOutlineMail className="mr-2" />
                     <input name='email' type="email" required placeholder="Email" className={`flex-1 outline-none`} />
                 </div>
-                {error && <p className='mb-4 text-red-500 text-start'>Email already registered!</p>}
+                {error && <p className='mb-4 text-red-500 text-start'>{error}</p>}
 
                 <div className="mb-4 flex items-center border rounded-md p-2" >
                     <IoKeyOutline className="mr-2" />
                     <input name='password' type={isPassword ? "password" : "text"} required placeholder="Password" className="flex-1 outline-none" />
                     {
                         isPassword ?
-                            <FaRegFaceRollingEyes onClick={() => setIsPassword(!isPassword)} className="ms-2 animate-bounce shadow-md" />
+                            <FaRegFaceRollingEyes onClick={() => setIsPassword(!isPassword)} className="ms-2 cursor-pointer bg-transparent animate-bounce shadow-md" />
                             :
-                            <PiSmileyXEyes onClick={() => setIsPassword(!isPassword)} className="ms-2 animate-bounce shadow-md" size={19} />
+                            <PiSmileyXEyes onClick={() => setIsPassword(!isPassword)} className="ms-2 cursor-pointer bg-transparent animate-bounce shadow-md" size={19} />
                     }
                 </div>
 
@@ -107,7 +154,9 @@ const Register = ({ isPassword, setIsPassword }) => {
                 }
             </form>
 
-            <SocialLogin />
+            <SocialLogin
+                fromURL={fromURL}
+            />
 
         </div>
     );

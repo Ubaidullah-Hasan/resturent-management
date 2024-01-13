@@ -8,13 +8,13 @@ import LoginForm from './LoginForm';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Register from './Register';
 import Forgot from './Forgot';
-import PageTitle from '../../Components/PageTitle';
 
 
 
 const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const fromURL = location?.state?.from || '/';
     const urlDevide = location.pathname.split('/');
     const lastPathName = urlDevide[urlDevide.length - 1];
     const [toggle, setToggle] = useState(JSON.parse(localStorage.getItem('authToggle')) || 1);
@@ -30,15 +30,18 @@ const Login = () => {
 
     const handleLogin = () => {
         setToggle(1);
-        navigate('/login');
+        const state = { from: fromURL };
+        navigate('/login', { state });
     }
     const handleRegister = () => {
         setToggle(2);
-        navigate('/register');
+        const state = { from: fromURL };
+        navigate('/register', { state });
     }
     const handleForgot = () => {
         setToggle(3);
-        navigate('/forgot');
+        const state = { from: fromURL };
+        navigate('/forgot', { state });
     }
 
     return (
@@ -75,6 +78,7 @@ const Login = () => {
                             isPassword={isPassword}
                             setIsPassword={setIsPassword}
                             setToggle={setToggle}
+                            fromURL={fromURL}
                         />
                     </div>
 
@@ -84,6 +88,7 @@ const Login = () => {
                             isPassword={isPassword}
                             setIsPassword={setIsPassword}
                             setToggle={setToggle}
+                            fromURL={fromURL}
                         />
                     </div>
 
