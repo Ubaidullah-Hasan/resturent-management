@@ -7,6 +7,7 @@ import Menu from "../Pages/Menu/Menu/Menu";
 import Shop from "../Pages/Shop/Shop";
 import Login from "../Pages/User/Login";
 import PrivateRoute from "./PrivateRoute";
+import ContactUs from "../Pages/ContactUs/ContactUs";
 
 export const router = createBrowserRouter([
     {
@@ -18,12 +19,16 @@ export const router = createBrowserRouter([
                 element: <Home />,
             },
             {
+                path: 'contactus',
+                element: <ContactUs />,
+            },
+            {
                 path: 'menu',
                 element: <Menu />,
             },
             {
                 path: '/shop/:category',
-                element: <PrivateRoute><Shop /></PrivateRoute>,
+                element: <Shop />,
             },
             {
                 path: '/login',

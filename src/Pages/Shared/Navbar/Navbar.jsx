@@ -7,8 +7,10 @@ import ActiveLink from '../../../Hooks/ActiveLink/ActiveLink';
 import { IoMdClose, IoMdMenu } from "react-icons/io";
 import useCategories from '../../../Hooks/useCategories';
 import { AuthContext } from '../../../Providers/AuthProviders';
+import useCart from '../../../Hooks/useCart';
 
 const Navbar = () => {
+    const [carts] = useCart();
     const { user, logOut } = useContext(AuthContext);
     const profileImg = user?.photoURL || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg";
 
@@ -52,22 +54,11 @@ const Navbar = () => {
                         <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="/login"><ActiveLink to={'/login'}>login</ActiveLink></li>
                 }
                 <div className='flex gap-3'>
-                    <div className="dropdown dropdown-end" key={"cart"}>
-                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+                    <div className="dropdown dropdown-end " key={"cart"}>
+                        <div className="btn btn-ghost btn-circle">
                             <div className="indicator">
                                 <img src={cart} alt="cart" />
-                                {/* todo: item number change */}
-                                <span className="badge badge-sm indicator-item left-[16px] top-[29px] bg-red-600 text-white rounded-full h-5 w-5">8</span>
-                            </div>
-                        </div>
-                        <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
-                            <div className="card-body">
-                                {/* todo: item & prise */}
-                                <span className="font-bold text-lg">8 Items</span>
-                                <span className="text-info">Subtotal: $999</span>
-                                <div className="card-actions">
-                                    <button className="btn btn-primary btn-block">View cart</button>
-                                </div>
+                                <span className="badge badge-sm indicator-item left-[16px] top-[29px] bg-red-600 text-white rounded-full h-5 w-5">{carts.length}</span>
                             </div>
                         </div>
                     </div>
@@ -93,23 +84,14 @@ const Navbar = () => {
             :
             <React.Fragment key={1}>
                 <div className="dropdown dropdown-end" key={"cart"}>
-                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-                        <div className="indicator">
-                            <img src={cart} alt="cart" />
-                            {/* todo: item number change */}
-                            <span className="badge badge-sm indicator-item left-[16px] top-[29px] bg-red-600 text-white rounded-full h-5 w-5">8</span>
-                        </div>
-                    </div>
-                    <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
-                        <div className="card-body">
-                            {/* todo: item & prise */}
-                            <span className="font-bold text-lg">8 Items</span>
-                            <span className="text-info">Subtotal: $999</span>
-                            <div className="card-actions">
-                                <button className="btn btn-primary btn-block">View cart</button>
+                    <Link to={'/'}>
+                        <div className="btn btn-ghost btn-circle hover:bg-transparent">
+                            <div className="indicator">
+                                <img src={cart} alt="cart" />
+                                <span className="badge badge-sm indicator-item left-[16px] top-[29px] bg-red-600 text-white rounded-full h-5 w-5">{carts.length}</span>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 </div>
 
                 {
@@ -121,7 +103,7 @@ const Navbar = () => {
 
                 <div className="dropdown dropdown-end" key={"profile"}>
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                        <div className="w-10 rounded-full">
+                        <div className="w-9 rounded-full">
                             <img alt="Tailwind CSS Navbar component" src={profileImg} />
                         </div>
                     </div>

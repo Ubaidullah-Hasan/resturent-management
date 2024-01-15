@@ -13,8 +13,9 @@ import Forgot from './Forgot';
 
 const Login = () => {
     const navigate = useNavigate();
-    const location = useLocation();
+    const location = useLocation(); 
     const fromURL = location?.state?.from || '/';
+
     const urlDevide = location.pathname.split('/');
     const lastPathName = urlDevide[urlDevide.length - 1];
     const [toggle, setToggle] = useState(JSON.parse(localStorage.getItem('authToggle')) || 1);
@@ -82,7 +83,7 @@ const Login = () => {
                         />
                     </div>
 
-                    {/* todo: for register */}
+                    {/* for register */}
                     <div className={toggle === 2 ? "block" : "hidden"}>
                         <Register
                             isPassword={isPassword}
@@ -92,7 +93,7 @@ const Login = () => {
                         />
                     </div>
 
-                    {/* todo: for forgot */}
+                    {/* for forgot */}
                     <div className={toggle === 3 ? "block" : "hidden"}>
                         <Forgot />
                     </div>

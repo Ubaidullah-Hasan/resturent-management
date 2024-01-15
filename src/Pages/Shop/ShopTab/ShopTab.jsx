@@ -80,6 +80,8 @@ const ShopTab = () => {
                 <FoodBox
                     data={activeCategory}
                     tabSection={true}
+                    setCurrentPage={setCurrentPage}
+                    currentPage={currentPage}
                 />
             </div>
 
