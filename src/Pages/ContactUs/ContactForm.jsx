@@ -9,8 +9,8 @@ import UseScreenWidth from '../../Hooks/UseScreenWidth';
 const ContactForm = () => {
     const { screenWidth } = UseScreenWidth();
     const breakPoint = 600; // for mobile < 600
-    const [isHuman, setIsHuman] = useState(false);
-    
+    const [isHuman, setIsHuman] = useState(true);
+
 
     const {
         register,
@@ -20,35 +20,25 @@ const ContactForm = () => {
 
     const captchaRef = useRef(null);
 
-    const onSubmit = async (data, e) => {
+    const onSubmit = async (data) => {
         console.log(data)
-        // Handle form submission logic here
-        const inputVal = e.target[0].value; console.log(inputVal);
-        const recaptchaResponse = captchaRef.current.getValue();
 
+        // Handle form submission logic here
+        const recaptchaResponse = captchaRef.current.getValue();
         try {
             const response = await axios.post('http://localhost:3000/api/verify-recaptcha', {
-                recaptchaResponse,
-                inputVal,
+                recaptchaResponse
             });
-
-            console.log(response);
+            setIsHuman(response.data.success)
         } catch (error) {
             console.error('Error submitting form:', error);
         }
 
         // Reset the reCAPTCHA widget
         captchaRef.current.reset();
-        setIsHuman(false);
     };
 
-
-    const recaptchaHandle = (value) => {
-        // console.log("Captcha value:", value);
-        if (value) {
-            setIsHuman(true);
-        }
-    };
+    console.log(isHuman)
 
     // recaptcha style
     const customRecaptchaStyle = {
@@ -134,7 +124,6 @@ const ContactForm = () => {
 
             <ReCAPTCHA
                 sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-                onChange={recaptchaHandle}
                 ref={captchaRef}
                 style={screenWidth < breakPoint ? customRecaptchaStyle : {}}
             />
