@@ -52,14 +52,14 @@ const ContactUs = () => {
                 />
 
                 {/* location section start */}
-                <div className='flex gap-6 justify-between items-start section-mb-130'>
+                <div className='flex flex-col md:flex-row gap-2 lg:gap-6 justify-between items-start section-mb-130'>
                     {
                         locationData.map((data, i) =>
-                            <div key={i} className='w-[424px] h-[300px] border' >
-                                <div className='bg-[#D1A054] py-6 flex justify-center'>{data?.icon}</div>
+                            <div key={i} className='w-full lg:w-[424px]  border' >
+                                <div className='bg-[#D1A054] py-4 lg:py-6 flex justify-center'>{data?.icon}</div>
 
-                                <div className='px-[30px] pb-[30px]'>
-                                    <div className='bg-[#F3F3F3] h-[190px] flex flex-col items-center justify-center'>
+                                <div className='px-[10px] lg:px-[30px] pb-[10px] lg:pb-[30px]'>
+                                    <div className='bg-[#F3F3F3] p-4 text-center h-[190px] flex flex-col items-center justify-center'>
                                         <h4 className='font-medium text-[24px] mb-4'>{data?.title}</h4>
                                         <p>{data?.line1}</p>
                                         <p>{data?.line2}</p>

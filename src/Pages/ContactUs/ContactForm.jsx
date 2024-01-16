@@ -1,18 +1,61 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaTelegramPlane } from "react-icons/fa";
+import ReCAPTCHA from "react-google-recaptcha";
+import axios from 'axios';
+import UseScreenWidth from '../../Hooks/UseScreenWidth';
 
 
 const ContactForm = () => {
+    const { screenWidth } = UseScreenWidth();
+    const breakPoint = 600; // for mobile < 600
+    const [isHuman, setIsHuman] = useState(false);
+    
+
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
 
-    const onSubmit = (data) => {
+    const captchaRef = useRef(null);
+
+    const onSubmit = async (data, e) => {
+        console.log(data)
         // Handle form submission logic here
-        console.log(data);
+        const inputVal = e.target[0].value; console.log(inputVal);
+        const recaptchaResponse = captchaRef.current.getValue();
+
+        try {
+            const response = await axios.post('http://localhost:3000/api/verify-recaptcha', {
+                recaptchaResponse,
+                inputVal,
+            });
+
+            console.log(response);
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
+
+        // Reset the reCAPTCHA widget
+        captchaRef.current.reset();
+        setIsHuman(false);
+    };
+
+
+    const recaptchaHandle = (value) => {
+        // console.log("Captcha value:", value);
+        if (value) {
+            setIsHuman(true);
+        }
+    };
+
+    // recaptcha style
+    const customRecaptchaStyle = {
+        transform: 'scale(0.7)',
+        WebkitTransform: 'scale(0.7)',
+        transformOrigin: '0 0',
+        WebkitTransformOrigin: '0 0'
     };
 
 
@@ -22,7 +65,7 @@ const ContactForm = () => {
             className="bg-gray-100 p-8 lg:p-[88px] section-mb-130"
         >
             {/* first row */}
-            <div className='flex gap-6 mb-6'>
+            <div className='flex flex-col md:flex-row gap-6 mb-6'>
                 <div className="w-full">
                     <label htmlFor="name" className="block text-xl font-bold text-gray-700 mb-4">
                         Name <span className={errors.name ? 'text-red-500' : ''}>*</span>
@@ -31,7 +74,7 @@ const ContactForm = () => {
                         {...register('name', { required: 'Name is required' })}
                         type="text"
                         id="name"
-                        className={`w-full py-[26px] px-[36px] border ${errors.name ? 'border-red-500' : 'border-gray-300'} rounded-md border-none focus:outline-primary`}
+                        className={`w-full py-[10px] md:py-[15px] lg:py-[26px] px-[15px] md:px-[20px] lg:px-[36px] border ${errors.name ? 'border-red-500' : 'border-gray-300'} rounded-md border-none focus:outline-primary`}
                         placeholder="Enter your name"
                     />
                     {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
@@ -51,7 +94,7 @@ const ContactForm = () => {
                         })}
                         type="email"
                         id="email"
-                        className={`w-full py-[26px] px-[36px] border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-md border-none focus:outline-primary`}
+                        className={`w-full py-[10px] md:py-[15px] lg:py-[26px] px-[15px] md:px-[20px] lg:px-[36px] border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-md border-none focus:outline-primary`}
                         placeholder="Enter your email"
                     />
                     {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
@@ -69,7 +112,7 @@ const ContactForm = () => {
                     )}
                     type="tel"
                     id="phone"
-                    className={`w-full py-[26px] px-[36px] border ${errors.phone ? 'border-red-500' : 'border-gray-300'} rounded-md border-none focus:outline-primary`}
+                    className={`w-full py-[10px] md:py-[15px] lg:py-[26px] px-[15px] md:px-[20px] lg:px-[36px] border ${errors.phone ? 'border-red-500' : 'border-gray-300'} rounded-md border-none focus:outline-primary`}
                     placeholder="Phone Number"
                 />
                 {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message}</p>}
@@ -82,17 +125,25 @@ const ContactForm = () => {
                 <textarea
                     {...register('message', { required: 'Message is required' })}
                     id="message"
-                    className={`w-full h-[200px] md:h-[300px] py-[26px] px-[36px] border ${errors.message ? 'border-red-500' : 'border-gray-300'} rounded-md border-none focus:outline-primary`}
+                    className={`w-full h-[120px]  md:h-[180px] lg:h-[300px] py-[10px] md:py-[15px] lg:py-[26px] px-[15px] md:px-[20px] lg:px-[36px] border ${errors.message ? 'border-red-500' : 'border-gray-300'} rounded-md border-none focus:outline-primary`}
                     placeholder="Your message here"
                     rows="4"
                 ></textarea>
                 {errors.message && <p className="text-red-500 text-sm">{errors.message.message}</p>}
             </div>
 
+            <ReCAPTCHA
+                sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                onChange={recaptchaHandle}
+                ref={captchaRef}
+                style={screenWidth < breakPoint ? customRecaptchaStyle : {}}
+            />
+
             <button
                 type="submit"
-                className="w-fit mx-auto text-white font-bold  py-4 px-[22px]  focus:outline-none flex justify-center items-center gap-2"
-                style={{ backgroundImage: 'linear-gradient(90deg, #835D23 0%, #B58130 100%)' }}
+                disabled={!isHuman}
+                className={`w-fit mt-[40px] md:mt-[70px] lg:mt-[102px] mx-auto text-white font-bold  py-4 px-[22px]  focus:outline-none flex justify-center items-center gap-2 `}
+                style={{ backgroundImage: isHuman ? 'linear-gradient(90deg, #835D23 0%, #B58130 100%)' : 'linear-gradient(90deg, #a8793291 0%, #ae7620a8 100%)' }}
             >
                 Send Message
                 <FaTelegramPlane />
