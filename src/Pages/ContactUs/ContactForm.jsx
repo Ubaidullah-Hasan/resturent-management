@@ -1,30 +1,32 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaTelegramPlane } from "react-icons/fa";
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from 'axios';
 import UseScreenWidth from '../../Hooks/UseScreenWidth';
+import emailjs from '@emailjs/browser';
+import { AuthContext } from '../../Providers/AuthProviders';
+
 
 
 const ContactForm = () => {
+    const { user } = useContext(AuthContext);
     const { screenWidth } = UseScreenWidth();
     const breakPoint = 600; // for mobile < 600
-    const [isHuman, setIsHuman] = useState(true);
+    const captchaRef = useRef(null); // for recaptcha tracking
+    const formRef = useRef(null); // form tracking for emailjs 
+    const [isHuman, setIsHuman] = useState(false);
+    const { register, handleSubmit, formState: { errors } } = useForm(); // from react form hook
 
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
-
-    const captchaRef = useRef(null);
-
+    // from submission code
     const onSubmit = async (data) => {
-        console.log(data)
+        // console.log(data);
+        
 
-        // Handle form submission logic here
+        // google recaptcha
         const recaptchaResponse = captchaRef.current.getValue();
+        // console.log(recaptchaResponse);
         try {
             const response = await axios.post('http://localhost:3000/api/verify-recaptcha', {
                 recaptchaResponse
@@ -33,12 +35,27 @@ const ContactForm = () => {
         } catch (error) {
             console.error('Error submitting form:', error);
         }
-
-        // Reset the reCAPTCHA widget
         captchaRef.current.reset();
-    };
+        setIsHuman(false) // todo: remove this
 
-    console.log(isHuman)
+
+        // email js code
+        emailjs.sendForm(import.meta.env.VITE_SERVICE_ID, import.meta.env.VITE_TEMPLATE_ID, formRef.current, import.meta.env.VITE_PUBLIC_KEY)
+            .then((result) => {
+                console.log(result.text);
+            }, (error) => {
+                console.log(error.text);
+            });
+    };
+    // console.log(isHuman)
+
+    const captchaChange = (value) => {
+        // console.log(value);
+        if (value) {
+            setIsHuman(true);
+        }
+    }
+
 
     // recaptcha style
     const customRecaptchaStyle = {
@@ -53,6 +70,7 @@ const ContactForm = () => {
         <form
             onSubmit={handleSubmit(onSubmit)}
             className="bg-gray-100 p-8 lg:p-[88px] section-mb-130"
+            ref={formRef}
         >
             {/* first row */}
             <div className='flex flex-col md:flex-row gap-6 mb-6'>
@@ -86,6 +104,7 @@ const ContactForm = () => {
                         id="email"
                         className={`w-full py-[10px] md:py-[15px] lg:py-[26px] px-[15px] md:px-[20px] lg:px-[36px] border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-md border-none focus:outline-primary`}
                         placeholder="Enter your email"
+                        defaultValue={user?.email}
                     />
                     {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
                 </div>
@@ -108,6 +127,7 @@ const ContactForm = () => {
                 {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message}</p>}
             </div>
 
+            {/* text area */}
             <div className="mb-6">
                 <label htmlFor="message" className="block text-xl font-bold text-gray-700 mb-4">
                     Message <span className={errors.message ? 'text-red-500' : ''}>*</span>
@@ -126,6 +146,7 @@ const ContactForm = () => {
                 sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
                 ref={captchaRef}
                 style={screenWidth < breakPoint ? customRecaptchaStyle : {}}
+                onChange={captchaChange}
             />
 
             <button
