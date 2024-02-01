@@ -8,7 +8,7 @@ import useCount from '../../../Hooks/useCount';
 
 const ShopTab = () => {
 
-    const [categories, categoryLoading] = useCategories();
+    const [categories, categoryLoading] = useCategories(); 
     const [loading, setLoading] = useState(true);
 
     // select category name when button is clicked in menu page
@@ -62,15 +62,15 @@ const ShopTab = () => {
         <div className='section-w'>
             <div role="tablist" className="flex flex-col md:flex-row gap-3 md:gap-[20px] lg:gap-[40px] justify-center">
                 {
-                    categories.map((category, index) => (
+                    categories.map((item, index) => (
                         <Link
-                            to={`/shop/${category}`}
+                            to={`/shop/${item?.category}`}
                             key={index}
                             role="tab"
-                            className={`md:text-[18px] lg:text-[24px] font-bold uppercase text-[#151515] duration-300 cursor-pointer ${activeTab === category ? 'active-tab' : ''}`}
-                            onClick={() => handleLink(category)}
+                            className={`md:text-[18px] lg:text-[24px] font-bold uppercase text-[#151515] duration-300 cursor-pointer ${activeTab === item?.category ? 'active-tab' : ''}`}
+                            onClick={() => handleLink(item)}
                         >
-                            {category}
+                            {item?.category}
                         </Link>
                     ))
                 }

@@ -9,7 +9,7 @@ import Login from "../Pages/User/Login";
 import PrivateRoute from "./PrivateRoute";
 import ContactUs from "../Pages/ContactUs/ContactUs";
 import DashboardLayout from "../Layout/DashboardLayout";
-import Admin from "../AdminPage/Admin/Admin";
+import AdminDash from "../AdminPage/AdminDash/AdminDash";
 
 export const router = createBrowserRouter([
     {
@@ -52,7 +52,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '/dashboard',
-                element: <Admin/>,
+                element: <AdminDash />,
             },
         ]
     }

@@ -38,11 +38,9 @@ const DashboardLayout = () => {
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
             <div className="bg-[#F6F6F6] drawer-content flex flex-col py-[50px] ps-6 pr-[50px]">
+
                 {/* Page content here */}
                 <Outlet /> 
-                
-
-
 
                 <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
             </div>
@@ -59,8 +57,9 @@ const DashboardLayout = () => {
 
                     {/* menu items */}
                     <div className='flex flex-col space-y-6'>
-                        {menuItems.map(item => <SidebarActiveLink
+                        {menuItems.map((item, i) => <SidebarActiveLink
                             to={item?.link}
+                            key={i}
                         >
                             <p className='text-[24px] flex items-center gap-3 uppercase font-bold font-cinzel'>{item?.icon} <span className='text-[16px]'>{item?.name}</span></p>
 

@@ -15,7 +15,7 @@ const Navbar = () => {
     const profileImg = user?.photoURL || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg";
 
     const [categories] = useCategories();
-    const firstCategory = categories[0];
+    const firstCategory = categories[0]?.category;
 
     const { screenWidth } = UseScreenWidth();
     const breakPoint = 1024; // tab, mobile < 1024
@@ -41,7 +41,7 @@ const Navbar = () => {
         <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="contact"><ActiveLink to={'/contactus'}>CONTACT us</ActiveLink></li>,
         <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="dashboard"><ActiveLink to={'/dashboard'}>DASHBOARD</ActiveLink></li>,
         <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="menu"><ActiveLink to={'/menu'}>Our Menu</ActiveLink></li>,
-        <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="shop"><ActiveLink to={`/shop/${firstCategory}`}>Our Shop</ActiveLink></li>, 
+        <li className='text-[16px] lg:text-[20px] font-medium md:font-extrabold uppercase text-white' key="shop"><ActiveLink to={`/shop/${firstCategory}`}>Our Shop</ActiveLink></li>,
 
         // conditional menu for different screens
         screenWidth < breakPoint ?
