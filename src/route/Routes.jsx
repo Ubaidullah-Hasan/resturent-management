@@ -10,6 +10,7 @@ import PrivateRoute from "./PrivateRoute";
 import ContactUs from "../Pages/ContactUs/ContactUs";
 import DashboardLayout from "../Layout/DashboardLayout";
 import AdminDash from "../AdminPage/AdminDash/AdminDash";
+import AddItem from "../AdminPage/AddItem/AddItem";
 
 export const router = createBrowserRouter([
     {
@@ -54,6 +55,18 @@ export const router = createBrowserRouter([
                 path: '/dashboard',
                 element: <AdminDash />,
             },
+            {
+                path: "additems",
+                element: <AddItem />
+            },
+            {
+                path: "manageitems",
+                element: <AddItem />
+            },
+            {
+                path: "allusers",
+                element: <AddItem />
+            }
         ]
     }
 ]);

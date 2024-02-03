@@ -3,16 +3,17 @@ import { GiWallet } from "react-icons/gi";
 import { HiUserGroup } from "react-icons/hi";
 import chef from "../../assets/dashboard/chef 1.svg"
 
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid } from 'recharts';
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, ResponsiveContainer, PieChart, Pie } from 'recharts';
+
 import useCategories from '../../Hooks/useCategories';
 import { RiCheckboxBlankFill } from "react-icons/ri";
+import { FaTruck } from 'react-icons/fa';
 
 
 const AdminDash = () => {
     const [categories] = useCategories();
 
     // for chart start
-    const colors = ['#057ead', 'orange', 'green', '#c30202'];
     const getRandomColor = () => {
         // Generate a random color in hexadecimal format
         const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, 0);
@@ -33,8 +34,31 @@ const AdminDash = () => {
 
         return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
     };
-
     // for chart end
+
+    // for pie chart
+    const data = [
+        { name: 'Group A', value: 400 },
+        { name: 'Group B', value: 300 },
+        { name: 'Group C', value: 300 },
+        { name: 'Group D', value: 200 },
+    ];
+
+    const colour = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+
+    const RADIAN = Math.PI / 180;
+    const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+        const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+        const x = cx + radius * Math.cos(-midAngle * RADIAN);
+        const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+        return (
+            <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+                {`${(percent * 100).toFixed(0)}%`}
+            </text>
+        );
+    };
+    // pie chart end
 
     return (
         <div>
@@ -79,18 +103,18 @@ const AdminDash = () => {
                     className='w-[290px] py-[35px] text-white rounded-lg flex gap-6 items-center justify-center '
                     style={{ backgroundImage: 'linear-gradient(90deg, #6AAEFF 0%, #B6F7FF 100%)' }}
                 >
-                    <img src={chef} alt='chef' />
+                    <FaTruck size={50} />
                     <div>
-                        <p className='text-[40px] font-extrabold'>1000</p>
-                        <p className='text-[24px]'>Products</p>
+                        <p className='text-[40px] font-extrabold'>500</p>
+                        <p className='text-[24px]'>Orders</p>
                     </div>
                 </div>
             </div>
 
             {/* graph */}
-            <div className='bg-white'>
+            <div className='bg-white flex items-center justify-between mt-8 '>
                 {/* left chart */}
-                <div className='mt-8 pb-[50px]'>
+                <div className='mb-[50px]'>
                     <BarChart
                         width={500}
                         height={300}
@@ -120,8 +144,25 @@ const AdminDash = () => {
 
 
                 {/* right chart */}
-                <div>
-
+                <div className='bg-red-500 p-4'>
+                    <ResponsiveContainer width="100%" height="400">
+                        <PieChart width={400} height={400}>
+                            <Pie
+                                data={data}
+                                cx="50%"
+                                cy="50%"
+                                labelLine={false}
+                                label={renderCustomizedLabel}
+                                outerRadius={80}
+                                fill="#8884d8"
+                                dataKey="value"
+                            >
+                                {data.map((entry, index) => (
+                                    <Cell key={`cell-${index}`} fill={colour[index % colour.length]} />
+                                ))}
+                            </Pie>
+                        </PieChart>
+                    </ResponsiveContainer>
                 </div>
             </div>
         </div>

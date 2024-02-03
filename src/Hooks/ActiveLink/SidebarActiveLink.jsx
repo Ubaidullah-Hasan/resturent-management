@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const SidebarActiveLink = ({ children, to }) => {
+const SidebarActiveLink = ({ children, to, end }) => {
     return (
         <NavLink
             to={to}
@@ -9,6 +9,7 @@ const SidebarActiveLink = ({ children, to }) => {
                 isActive
                     ? "text-white" : "text-black"
             }
+            end={end}  // Add the end prop
         >
             {children}
         </NavLink>
