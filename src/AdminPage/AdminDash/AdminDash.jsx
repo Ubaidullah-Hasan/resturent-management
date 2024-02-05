@@ -61,7 +61,7 @@ const AdminDash = () => {
     // pie chart end
 
     return (
-        <div>
+        <div className='bg-[#F6F6F6] ps-6 pr-[50px] pt-[50px] pb-[130px]'>
             <h1 className='font-cinzel text-[32px] mb-6'>Hi, Welcome Back!</h1>
 
             {/* history */}

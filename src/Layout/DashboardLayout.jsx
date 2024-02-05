@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { HiUserGroup } from "react-icons/hi2";
 import { FaBook } from "react-icons/fa";
 import { MdOutlineStackedBarChart } from "react-icons/md";
@@ -9,9 +9,6 @@ import SideBarMenuCommon from '../Pages/Shared/SideBarMenuCommon/SideBarMenuComm
 
 
 const DashboardLayout = () => {
-    const location = useLocation();
-    const path = location.pathname;
-    const haveUrlDashboard = path.split('/')[path.split('/').length - 1] === 'dashboard';
 
     const menuItems = [
         {
@@ -40,7 +37,7 @@ const DashboardLayout = () => {
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-            <div className={`bg-[#F6F6F6] drawer-content flex flex-col ${haveUrlDashboard ? 'ps-6 pr-[50px]' : 'px-[150px]'} pt-[50px] pb-[130px] `}>
+            <div className={` drawer-content flex flex-col section-mb-130`}>
 
                 {/* Page content here */}
                 <Outlet />
