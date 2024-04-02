@@ -9,7 +9,7 @@ const useCart = () => {
         queryKey: ['carts', user?.email],
         queryFn: async () => {
             try {
-                const response = await fetch(`https://resturent-app-server.vercel.app/carts?email=${user?.email}`)
+                const response = await fetch(`http://localhost:3000/carts?email=${user?.email}`)
                 if (!response.ok) {
                     throw new Error('Network error was not ok!')
                 }

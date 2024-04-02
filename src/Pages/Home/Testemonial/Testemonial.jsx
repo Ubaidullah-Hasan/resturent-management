@@ -23,7 +23,7 @@ const Testemonial = () => {
     const { screenWidth } = UseScreenWidth();
     const [reviews, setReviews] = useState([]);
     useEffect(() => {
-        fetch('https://resturent-app-server.vercel.app/reviews')
+        fetch('http://localhost:3000/reviews')
             .then(res => res.json())
             .then(data => setReviews(data))
     }, [])

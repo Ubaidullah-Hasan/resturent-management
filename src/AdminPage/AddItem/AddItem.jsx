@@ -11,7 +11,7 @@ const AddItem = () => {
                 title='Add Items'
             />
 
-            <div className='ms-[40px] lg:ms-[150px] mr-[40px] lg:mr-[177px]'>
+            <div>
                 <SectionHeader
                     title={"ADD AN ITEM"}
                     subHeading={"What's new?"}

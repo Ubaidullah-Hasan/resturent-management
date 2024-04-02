@@ -23,7 +23,7 @@ const FoodBox = ({ data, tabSection = false }) => {
                 email: user.email,
             }
 
-            fetch(`https://resturent-app-server.vercel.app/carts`, {
+            fetch(`http://localhost:3000/carts`, {
                 method: 'post',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(cartItem)

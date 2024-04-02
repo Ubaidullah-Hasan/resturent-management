@@ -7,7 +7,7 @@ const PopularMenu = () => {
 
 
     useEffect(() => {
-        fetch(`https://resturent-app-server.vercel.app/categories/popular`)
+        fetch(`http://localhost:3000/categories/popular`)
             .then(res => res.json())
             .then(data => {
                 setPopular(data);

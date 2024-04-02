@@ -43,7 +43,7 @@ const AddItemForm = () => {
                 price: data.price,
                 image: imageURL
             }
-            const result = await axios.post('https://resturent-app-server.vercel.app/menu', recipeData)
+            const result = await axios.post('http://localhost:3000/menu', recipeData)
             const responseRecipe = result.data;
             // console.log(responseRecipe);
 

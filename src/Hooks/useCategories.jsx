@@ -8,7 +8,7 @@ const useCategories = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await fetch("https://resturent-app-server.vercel.app/categories");
+                const res = await fetch("http://localhost:3000/categories");
                 if (!res.ok) {
                     throw new Error("Network response was not ok");
                 }

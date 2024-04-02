@@ -28,7 +28,7 @@ const ContactForm = () => {
         const recaptchaResponse = captchaRef.current.getValue();
         // console.log(recaptchaResponse);
         try {
-            const response = await axios.post('https://resturent-app-server.vercel.app/api/verify-recaptcha', {
+            const response = await axios.post('http://localhost:3000/api/verify-recaptcha', {
                 recaptchaResponse
             });
             setIsHuman(response.data.success)

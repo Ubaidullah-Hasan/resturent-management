@@ -31,7 +31,7 @@ const ShopTab = () => {
 
 
     useEffect(() => {
-        fetch(`https://resturent-app-server.vercel.app/categories/${searchCategory}?limit=3&page=${currentPage}`)
+        fetch(`http://localhost:3000/categories/${searchCategory}?limit=3&page=${currentPage}`)
             .then(res => res.json())
             .then(data => {
                 setActiveCategory(data);

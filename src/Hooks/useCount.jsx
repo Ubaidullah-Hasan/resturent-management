@@ -6,7 +6,7 @@ const useCount = (categoryName) => {
     const menuCount = countItems?.menuCount || 0;
 
     useEffect(() => {
-        fetch(`https://resturent-app-server.vercel.app/totalCount/${categoryName}`)
+        fetch(`http://localhost:3000/totalCount/${categoryName}`)
             .then(res => res.json())
             .then(data => {
                 setCountItems(data)

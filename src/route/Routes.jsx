@@ -11,6 +11,7 @@ import ContactUs from "../Pages/ContactUs/ContactUs";
 import DashboardLayout from "../Layout/DashboardLayout";
 import AdminDash from "../AdminPage/AdminDash/AdminDash";
 import AddItem from "../AdminPage/AddItem/AddItem";
+import ManageItems from "../AdminPage/ManageItems/ManageItems";
 
 export const router = createBrowserRouter([
     {
@@ -61,7 +62,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "manageitems",
-                element: <AddItem />
+                element: <ManageItems />
             },
             {
                 path: "allusers",
