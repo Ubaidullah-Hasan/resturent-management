@@ -5,7 +5,7 @@ const useMenu = () => {
     const [loading, setLoading] = useState(true);
     // fetch data from server
     useEffect(() => {
-        fetch('http://localhost:3000/menu')
+        fetch('https://resturent-app-server.vercel.app/menu')
             .then(res => res.json())
             .then(data => {
                 setMenu(data);

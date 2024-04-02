@@ -22,13 +22,13 @@ const ContactForm = () => {
     // from submission code
     const onSubmit = async (data) => {
         // console.log(data);
-        
+
 
         // google recaptcha
         const recaptchaResponse = captchaRef.current.getValue();
         // console.log(recaptchaResponse);
         try {
-            const response = await axios.post('http://localhost:3000/api/verify-recaptcha', {
+            const response = await axios.post('https://resturent-app-server.vercel.app/api/verify-recaptcha', {
                 recaptchaResponse
             });
             setIsHuman(response.data.success)

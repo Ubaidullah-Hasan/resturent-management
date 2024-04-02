@@ -9,11 +9,11 @@ import useCart from '../../../Hooks/useCart';
 const FoodBox = ({ data, tabSection = false }) => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
-    const location = useLocation(); 
+    const location = useLocation();
     const [, refetch] = useCart();
 
     const handleCart = (item) => {
-        
+
         if (user && user.email) {
             const cartItem = {
                 foodId: item._id,
@@ -23,7 +23,7 @@ const FoodBox = ({ data, tabSection = false }) => {
                 email: user.email,
             }
 
-            fetch(`http://localhost:3000/carts`, {
+            fetch(`https://resturent-app-server.vercel.app/carts`, {
                 method: 'post',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(cartItem)
@@ -51,7 +51,7 @@ const FoodBox = ({ data, tabSection = false }) => {
                 confirmButtonText: "Yes, Login!"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    navigate("/login", { state: { from: location.pathname}});
+                    navigate("/login", { state: { from: location.pathname } });
                 }
             });
         }

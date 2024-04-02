@@ -23,7 +23,7 @@ const Testemonial = () => {
     const { screenWidth } = UseScreenWidth();
     const [reviews, setReviews] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:3000/reviews')
+        fetch('https://resturent-app-server.vercel.app/reviews')
             .then(res => res.json())
             .then(data => setReviews(data))
     }, [])
@@ -48,7 +48,7 @@ const Testemonial = () => {
                     reviews.map((review) => (
                         <SwiperSlide key={review?._id}>
                             <div className='flex flex-col items-center text-center'>
-                                
+
                                 <Rating
                                     value={review?.rating}
                                     filledColor="#CD9003"

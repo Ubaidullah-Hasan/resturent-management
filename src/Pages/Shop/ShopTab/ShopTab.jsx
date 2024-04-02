@@ -8,7 +8,7 @@ import useCount from '../../../Hooks/useCount';
 
 const ShopTab = () => {
 
-    const [categories, categoryLoading] = useCategories(); 
+    const [categories, categoryLoading] = useCategories();
     const [loading, setLoading] = useState(true);
 
     // select category name when button is clicked in menu page
@@ -28,10 +28,10 @@ const ShopTab = () => {
     const totalPages = Math.ceil(categoryWiseItemsCount / limit);
     const pageCount = Array.from({ length: totalPages }, (_, i) => i + 1);
     // VARIABLE FOR PAGINATION END
-    
+
 
     useEffect(() => {
-        fetch(`http://localhost:3000/categories/${searchCategory}?limit=3&page=${currentPage}`)
+        fetch(`https://resturent-app-server.vercel.app/categories/${searchCategory}?limit=3&page=${currentPage}`)
             .then(res => res.json())
             .then(data => {
                 setActiveCategory(data);
@@ -86,7 +86,7 @@ const ShopTab = () => {
             </div>
 
             <div className='section-mb'>
-                <Pagination 
+                <Pagination
                     setCurrentPage={setCurrentPage}
                     currentPage={currentPage}
                     pages={pageCount}
